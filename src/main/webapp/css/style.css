@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+/* Common */
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+        color: var(--primary-font-color);
+    }
+    i {
+        font-size: 1.15rem;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="email"]{
+        height:70%;
+        width:100%;
+        border:none;
+        background: transparent !important;
+        border: 1px solid var(--special-color) !important;
+        color: var(--primary-font-color) !important;
+        border-radius: var(--border-radius) !important;
+        padding: 0.5rem;
+        outline:none;
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55 );
+    }
+    .form-control:focus {
+        border-color: inherit;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    .form-control::placeholder{
+        color: var(--sec-font-color);
+    }
+
+/* variables */
+    :root {
+        --border-radius: 0.8rem;
+        --background-blur: 5rem;
+    }
+
+/* Srollbar */
+    ::-webkit-scrollbar {
+        width: 0.3rem;
+    }
+    ::-webkit-scrollbar-track {
+        background-color: var(--background-color);
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--sec-background-color);
+        border-radius: var(--border-radius);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: var(--special-color);
+    }
+
+/* body */
+    body {
+        background-color: var(--background-color);
+        position: relative;
+        min-height: 100vh;
+        color: var(--primary-font-color);
+    }
+
+/* Nav Bar */
+    #clonenav{
+        display: none;
+        color: var(--sec-background-color) !important;
+        background-color: var(--sec-background-color);
+    }
+    #navbar {
+        background-color: var(--sec-background-color) !important;
+    }
+    .navbar-brand {
+        color: var(--special-color);
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+    .navbar-toggler {
+        color: var(--primary-font-color);
+    }
+    .search-box{
+        position:relative;
+        width:0px;
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55 );
+    }
+    .search-box.active{
+        width: 200px;
+    }
+    .search-box input {
+        opacity: 0;
+    }
+    .search-box.active input{
+        opacity:1;
+    }
+    .search-box .search-btn{
+        height:40px;
+        width:40px;
+        background:transparent;
+        color:var(--primary-font-color);
+        position: absolute;
+        top:50%;
+        right:-40px;
+        transform: translateY(-50%);
+        line-height:40px;
+        text-align:center;
+        border-radius:50%;
+        cursor:pointer;
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        transition: color 0.25s;
+        z-index:2;
+    }
+    .search-box .search-btn.close {
+        color: var(--special-color);
+    }
+    #usericon{
+        padding: 0.5rem 0.8rem;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+    #usericon:hover{
+        background-color: var(--sec-background-color);
+    }
+    .loading-bar {
+        border-radius: 5rem;
+        right: auto;
+        left: 0;
+        position: absolute;
+        width: 0;
+        height: 0.3rem;
+        background-color: var(--special-color);
+        border-bottom: 0.1rem solid var(--sec-background-color);
+        bottom: 0;
+    }
+
+/* Break Points */
+    /* `xs` returns only a ruleset and no media query */
+    /* `sm` applies to x-small devices (portrait phones, less than 576px) */
+    @media (max-width: 575.98px) {
+    }
+
+    /* `md` applies to small devices (landscape phones, less than 768px) */
+    @media (max-width: 767.98px) { 
+    }
+
+    /* `lg` applies to medium devices (tablets, less than 992px) */
+    @media (max-width: 991.98px) { 
+        #usericon{
+            border: 0.1rem solid var(--primary-font-color);
+            text-align: center;
+            width: 10rem;
+            border-radius: var(--border-radius);
+        }
+        #usericon::after{
+            padding: 1rem;
+            content: "Login";
+        }
+        
+    }
+
+    /* `xl` applies to large devices (desktops, less than 1200px) */
+    @media (max-width: 1199.98px) { 
+        
+    }
+
+    /* `xxl` applies to x-large devices (large desktops, less than 1400px) */
+    @media (max-width: 1399.98px) { 
+        
+    }

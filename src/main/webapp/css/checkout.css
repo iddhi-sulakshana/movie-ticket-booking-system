@@ -1,0 +1,45 @@
+.display {
+    background-color: var(--sec-background-color);
+}
+
+.title {
+    font-weight: 300;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+}
+.movie-title {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.1rem;
+}
+.seat-numbers {
+    font-weight: 300;
+    font-size: 1.3rem;
+}
+.tickets {
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+.time {
+    font-weight: 300;
+}
+.price-label {
+    font-weight: 300;
+}
+.amount {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.amount::before {
+    content: '$';
+    font-weight: 500;
+}
+
+ol li {
+    text-align: justify;
+    line-height: 1.7rem;
+    color: var(--sec-font-color);
+    font-weight: 300;
+    margin-bottom: 1rem;
+}

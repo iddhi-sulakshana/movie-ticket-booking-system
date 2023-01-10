@@ -1,0 +1,70 @@
+/* cover */
+    #hero {
+        height: 100vh;
+        width: 100%;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat; 
+    }
+    #hero .cover-header {
+        font-size: 6rem;
+        line-height: 10rem;
+        font-weight: 700;
+    }
+    #hero .cover-description {
+        width: 50%;
+        line-height: 2rem;
+        font-weight: 300;
+        margin-bottom: 2rem;
+    }
+
+/* Movies */
+    .movies .section-header {
+        font-weight: 500;
+    }
+
+/* Card */
+    .card {
+        overflow: hidden;
+    }
+    .card .card-img-overlay {
+        transform: translateY(100%);
+        background-color: var(--card-background);
+        backdrop-filter: blur(0.2rem);
+    }
+    .card .card-img-overlay .card-title {
+        font-weight: 500;
+        font-size: 2rem;
+    }
+    .card .card-img-overlay .card-text {
+        line-height: 1.5rem;
+        font-weight: 300;
+    }
+
+/* breakpoints */
+/* sm */
+@media (max-width: 575px){
+    .card .card-img-overlay .card-title{
+        font-size: 2rem;
+    }
+    .card .card-img-overlay .card-text {
+        line-height: 1rem;
+    }
+    .card .card-img-overlay .btn{
+        width: 100%;
+    }
+}
+/* under lg */
+@media (max-width: 991.98px) {
+    #hero .cover-description{
+        width: 100%;
+    }
+    #hero .cover-header{
+        font-size: 4rem;
+        line-height: 4rem;
+    }
+    #hero .cover-description{
+        line-height: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+}

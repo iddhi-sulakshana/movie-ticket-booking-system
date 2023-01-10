@@ -1,0 +1,32 @@
+// movies
+{
+    "TMDBid": 76600,
+    "title": "Avatar: The Way of Water",
+    "poster": "/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",
+    "banner": "/s16H6tpK2utvwDtzZ8Qy4qm5Emw.jpg",
+    "genres": ["Action", "Adventure", "Science Fiction"],
+    "description": "Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure.",
+    "showdates": ["2023/01/20", "2023/01/21", "2023/01/22"],
+    "showtime": "9:00"
+};
+// tickets
+{
+    "ticketId": 1,
+    "name": "name name",
+    "email": "name@example.com",
+    "phone": "0789456123",
+    "TMDBid": 76600,
+    "title": "Avatar: The Way of Water",
+    "seats": ["A1", "B2", "C3"],
+    "price": "100.00",
+    "showDate": "2023/01/20",
+    "showTime": "9:00"
+};
+// accounts
+{
+    "fullName": "name name",
+    "email": "name@example.com",
+    "phone": "0789456123", // optional
+    "password": "password",
+    "role": "admin" // optional
+}

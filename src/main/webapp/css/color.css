@@ -1,0 +1,15 @@
+:root {
+    --dark-black: #080808;
+    --light-dark: #1b1b1b;
+    --grey: #95989f;
+    --red: #ffcb05;
+    --white: #fff;
+    --card-background: rgba(0, 0, 0, 0.75);
+
+    --background-color:var(--dark-black);
+    --primary-font-color: var(--white);
+    --sec-font-color: var(--grey);
+    --special-color: var(--red);
+
+    --sec-background-color: var(--light-dark);
+}

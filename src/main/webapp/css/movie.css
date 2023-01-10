@@ -1,0 +1,48 @@
+.cover {
+    width: 100%;
+    height: 75vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+}
+.cover .details {
+    position: absolute;
+    bottom: 0;
+}
+.cover .details h1 {
+    font-weight: 700;
+}
+
+.cover .details span i{
+    color: var(--special-color)
+}
+
+.tags .tag {
+    background-color: var(--sec-background-color);
+}
+
+.play-btn {
+    position: absolute;
+    z-index: 1000;
+    right: 0.5rem;
+    top: 0.5rem;
+}
+.video-wrapper {
+    z-index: 900;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    display: none;
+}
+.video-wrapper iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    background-color: var(--sec-background-color);
+}
