@@ -10,12 +10,14 @@
         font-size: 6rem;
         line-height: 10rem;
         font-weight: 700;
+        text-shadow: 5px 5px 5px black;
     }
     #hero .cover-description {
         width: 50%;
         line-height: 2rem;
         font-weight: 300;
         margin-bottom: 2rem;
+        text-shadow: 3px 3px 4px black;
     }
 
 /* Movies */

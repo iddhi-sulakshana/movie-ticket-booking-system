@@ -1,18 +1,24 @@
+<%@ page import="com.example.ticketbookingsystem.Movie" %>
+<%@ page import="com.example.ticketbookingsystem.MovieStruct" %>
 <%@include file="./header.jsp" %>
     <title>ABC Movies</title>
     <link rel="stylesheet" href="./css/home.css">
     <script defer src="./js/home.js"></script>
 <%@include file="./nav.jsp" %>
 <!-- Cover -->
-    <div id="hero" class="p-lg-5 p-0" style="background-image: url('./assets/cover/cover1.jpg');">
+    <% Movie movieobj = new Movie();
+        MovieStruct movie = movieobj.getMovie(76600);
+        String posterpath = movie.banner;
+    %>
+    <div id="hero" class="p-lg-5 p-0" style="background-image: url('https://image.tmdb.org/t/p/original<%=posterpath%>');">
         <div class="container h-100 d-flex align-items-center">
             <div class="cover">
-                <h1 class="display-1 cover-header">Black Adam</h1>
+                <h1 class="display-1 cover-header"><%= movie.title %></h1>
                 <p class="w-lg-50 cover-description">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure velit minus, ex quasi ea veniam nobis modi ut quia, ipsum magnam eos nisi animi sequi ab provident molestiae consequuntur laboriosam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure velit minus, ex quasi ea veniam nobis modi ut quia, ipsum magnam eos nisi animi sequi ab provident molestiae consequuntur laboriosam.
+                    <%=movie.description%>
                 </p>
-                <button class="btn btn-lg btn-outline-primary">Book now</button>
-                <button class="btn btn-lg btn-outline-success mx-2">More...</button>
+                <button class="btn btn-lg btn-primary">Book now</button>
+                <button class="btn btn-lg btn-success mx-2">More...</button>
             </div>
         </div>
     </div>
