@@ -1,0 +1,43 @@
+.dcontent {
+    background-color: var(--sec-background-color);
+}
+.dcontent h4 {
+    font-weight: 500;
+}
+.ticket {
+    position: relative;
+    border-radius: var(--border-radius);
+    border: 0.2rem var(--special-color) solid;
+}
+.ticket .price {
+    writing-mode: vertical-lr;
+    font-weight: 500;
+    font-size: 1.5rem;
+    border-right: 0.2rem var(--special-color) solid;
+}
+.ticket .t-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+.ticket .t-time {
+    font-weight: 300;
+}
+.ticket .seat {
+    font-weight: 500;
+    font-size: 1.5rem;
+    border-left: 0.2rem var(--special-color) solid;
+}
+
+
+/* Breakpoints */
+@media (max-width: 575.98px) {
+    .ticket .price {
+        border-right: none;
+        writing-mode:horizontal-tb;
+        border-bottom: 0.2rem var(--special-color) solid;
+    }
+    .ticket .seat {
+        border-left: none;
+        border-top: 0.2rem var(--special-color) solid;
+    }
+}

@@ -1,0 +1,39 @@
+.breakpoint::before {
+  content: "XS";
+  color: red;
+  font-size: 2rem;
+  font-weight: bold;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2000;
+}
+@media (min-width: 576px) {
+  .breakpoint::before {
+    content: "SM";
+  }
+}
+
+@media (min-width: 768px) {
+  .breakpoint::before {
+    content: "MD";
+  }
+}
+
+@media (min-width: 992px) {
+  .breakpoint::before {
+    content: "LG";
+  }
+}
+
+@media (min-width: 1200px) {
+  .breakpoint::before {
+    content: "XL";
+  }
+}
+
+@media (min-width: 1400px) {
+  .breakpoint::before {
+    content: "XXL";
+  }
+}

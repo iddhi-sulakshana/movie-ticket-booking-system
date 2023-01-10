@@ -1,0 +1,133 @@
+body {
+    overflow-x: hidden;
+}
+.container {
+    background-color: var(--sec-background-color);
+}
+.title {
+    position: relative;
+}
+.title::before {
+    content: '';
+    position: absolute;
+    width: 150%;
+    top: 0;
+    left: -100%;
+    transform: translateX(50%);
+    height: 1px;
+    background: var(--special-color);
+}
+.title::after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    bottom: 0;
+    left: -150%;
+    transform: translateX(50%);
+    height: 1px;
+    background: var(--special-color);
+}
+
+.seat-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    background-color: transparent;
+}
+.seat-wrapper::-webkit-scrollbar {
+    height: 0.25rem;
+}
+.seat-area {
+    list-style: none;
+    display: block;
+    margin-bottom: 1rem;
+    padding: 0;
+}
+
+.seat-line {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+.seat-letter {
+    font-weight: 300;
+    text-align: center;
+    width: 40px;
+}
+
+.seat-row {
+    list-style: none;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    width: 100%;
+}
+.seat-group {
+    display: flex;
+    flex-wrap: nowrap;
+    list-style: none;
+    justify-content: space-around;
+    padding: 0;
+}
+
+.seat {
+    padding: 0.2rem;
+    width: 50px;
+    height: 47px;
+}
+.seat>div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.seat.booked {
+    cursor:not-allowed;
+}
+.seat.free {
+    cursor: copy;
+}
+.seat.selected {
+    cursor: pointer;
+}
+.seat.free>div {
+    background-image: url(../assets/primary-images/seat-free.png);
+}
+.seat.booked>div {
+    background-image: url(../assets/primary-images/seat-booked.png);
+}
+.seat.selected>div {
+    background-image: url(../assets/primary-images/seat-selected.png);
+}
+.seat>div>span {
+    color: var(--special-color);
+    user-select: none;
+}
+.seat>div>span {
+    display: none;
+}
+.seat.selected>div>span,
+.seat.free>div>span {
+    display: block;
+}
+.checkout-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+.checkout-sub{
+    font-weight: 300;
+    font-size: 1.4rem;
+    word-wrap: break-word;
+}
+.checkout-sub.price::before {
+    content: '$';
+}
+@media (max-width: 991px) {
+    .seat-area {
+        width: 900px;
+    }
+}
