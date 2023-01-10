@@ -1,0 +1,121 @@
+body{
+    overflow: hidden;
+}
+.menu {
+    z-index: 1000;
+    position: absolute;
+    background-color: var(--sec-background-color)
+}
+.menu .menu-bar {
+    display: flex;
+    list-style: none;
+}
+.menu-item {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background-color);
+}
+.menu-item:hover {
+    cursor: pointer;
+    background-color: var(--sec-background-color);
+}
+.menu-item.active {
+    cursor: default;
+    background-color: var(--special-color);
+}
+.menu-item .menu-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+.menu-item .menu-text {
+    font-size: 1.25rem;
+}
+
+.menu-left {
+    left: 0;
+    height: 100vh;
+}
+.menu-left .menu-bar{
+    
+    flex-direction: column;
+}
+.menu-left .menu-item {
+    justify-content: flex-start;
+}
+
+.menu-bottom {
+    bottom: 0;
+    width: 100%;
+    height: 10vh;
+}
+.menu-bottom .menu-bar {
+    flex-direction: row;
+}
+.menu-bottom .menu-bar .menu-text {
+    display: none;
+}
+.menu-bottom .menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.menu-bottom .menu-item i {
+    margin-right: 0;
+}
+
+.display-wrapper {
+    z-index: 0;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+.display {
+    overflow: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    right: 0;
+}
+
+.content {
+    background-color: var(--sec-background-color);
+}
+
+.sub-card {
+    border: 1px solid var(--special-color);
+    background-color: var(--background-color);
+}
+.sub-card .title {
+    font-weight: 300;
+    font-size: 1.2rem;
+}
+.sub-card h4 {
+    font-weight: 700;
+}
+.sub-card .price {
+    font-weight: 700;
+    font-size: 2rem;
+}
+.sub-card .tag {
+    font-weight: 300;
+}
+.sub-card .decimal {
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+.hidden-div {
+    background-color: red;
+    height: 10vh;
+}
+
+.ui-state-highlight {
+    border: 0 !important;
+  }
+
+  .ui-state-highlight a {
+    background: var(--special-color) !important;
+    color: var(--primary-font-color) !important;
+  }

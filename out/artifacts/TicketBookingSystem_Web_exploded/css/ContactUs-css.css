@@ -1,0 +1,90 @@
+*{
+    padding:0;
+    margin:0;
+
+}
+body{
+    background-image: url(../assets/about/felix-mooneeram-evlkOfkQ5rE-unsplash.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+	background-size: cover;
+	background-position: center;
+	margin: 0;
+	padding: 0;
+}
+
+.contact-title{
+    color:aliceblue;
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+.contact-sub-title{
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 60px;
+}
+.contact .contact-info-item{
+    flex: 0 0 25%;
+    max-width: 25%;
+    text-align: center;
+}
+.contact .contact-info-item{
+    display: inline-block;
+}
+.contact .contact-info-item .icon .fa{
+    font-size: 25px;
+    color: #fff;
+}
+.contact .contact-info-item h4{
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: capitalize;
+    margin: 15px 0 5px;
+}
+.container .contact-info-item p{
+    font-size: 16px;
+    line-height: 20px;
+    color: #fff;
+    font-weight: 400;
+
+}
+.contact .contact-form{
+    flex:0 0 100%;
+    max-width: 100%;
+}
+.contact .contact-form .col-6{
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+.contact .contact-form .col-12{
+    flex: 0 0 100%;
+    max-width: 100%;
+    background-color: rgb(15, 13, 13);
+}
+.contact .contact-form .form-item{
+    margin-bottom: 30px;
+}
+.contact .contact-form .form-item .form-control{
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    background: #fff;
+    border: 1px solid #fff;
+    padding: 10px 25px;
+    font-size: 16px;
+    color: var(--text-black-700);
+    transition: all 0.3s ease;;
+}
+.contact .contact-form .form-item .form-control:form{
+    box-shadow:0 0 20px rgba(48, 46, 77, 0.15);
+}
+.contact .contact-form .form-item textarea.form-control{
+    height: 140px;
+}
+.contact .contact-form .btn{
+    height: 50px;
+    padding: 0 50px;
+}

@@ -10,7 +10,7 @@
 - Atlas Mongo Server
 
 ## Useful Mongo Code Examples
-
+<mongodb.version>4.8.0</mongodb.version>
 ### Mongo JDBC Dependency
 ```xml
 <dependency>
