@@ -1,3 +1,12 @@
+<% //redirect
+	String role = (String) session.getAttribute("logRole");
+	if (role == "admin") {
+		response.sendRedirect("mDashboard.jsp");
+	}
+	if (role == "user") {
+		response.sendRedirect("uDashboard.jsp");
+	}
+%>
 <%@include file="./header.jsp" %>
 	<link rel="stylesheet" href="./css/login.css">
 	<title>Login / Signup</title>
@@ -18,21 +27,34 @@
 					<div class="slider-tab"></div>
 				</div>
 				<div class="form-inner">
-					<form action="#" class="login">
+					<form name="logInForm" action="loginServlet" class="login" method="post">
 						<div class="field">
-							<input class="npt" type="text" placeholder="Email Address" required>
+							<input class="npt" name="email" type="text" placeholder="Email Address" required>
+						</div>
+						<div>
+							<% String messageE = (String) session.getAttribute("loginEmailError");
+								if(messageE != null) {
+									out.print("<p style='color:red; font-size: 13px;'>" + messageE + "</p>");
+									session.removeAttribute("loginEmailError");
+								} %>
 						</div>
 						<div class="field">
-							<input type="password" placeholder="Password" required>
+							<input type="password" name="password" placeholder="Password" required>
 						</div>
-						<!-- <div class="pass-link"><a href="#">Forgot password?</a></div> -->
+						<div>
+							<% String messageP = (String) session.getAttribute("loginPasswordError");
+								if(messageP != null) {
+									out.print("<p style='color:red; font-size: 13px;'>" + messageP + "</p>");
+									session.removeAttribute("loginPasswordError");
+								} %>
+						</div>
 						<div class="field btn">
 							<div class="btn-layer"></div>
 							<input type="submit" value="Login">
 						</div>
 						<div class="signup-link">don't have an account?<a href="" style="color: #0000FF;"> Signup Now</a></div>
 					</form>
-					<form action="#" class="signup">
+					<form name="signInForm" action="#" class="signup" method="post">
 						<div class="field">
 							<input type="text" placeholder="Full Name" required>
 						</div>

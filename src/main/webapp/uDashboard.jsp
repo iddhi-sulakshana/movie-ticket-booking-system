@@ -1,3 +1,9 @@
+<% //restrict access through url
+    String role = (String) session.getAttribute("logRole");
+    if (role != "user") {
+        response.sendRedirect("index.jsp");
+    }
+%>
 <%@include file="./header.jsp" %>
     <title>ABC Movies</title>
     <link rel="stylesheet" href="./css/uDashboard.css">
