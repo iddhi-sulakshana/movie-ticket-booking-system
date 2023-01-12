@@ -25,8 +25,8 @@
                 <p class="w-lg-50 cover-description">
                     <%=popular.description%>
                 </p>
-                <button class="btn btn-lg btn-primary">Book now</button>
-                <button class="btn btn-lg btn-success mx-2">More...</button>
+                <button class="btn btn-lg btn-primary" onclick="document.location='./selectSeat.html'">Book now</button>
+                <button class="btn btn-lg btn-success mx-2" onclick="document.location='./movie.jsp?movieId=<%=popular.TMDBid%>'">More...</button>
             </div>
         </div>
     </div>
@@ -56,7 +56,7 @@
                             if(movie.description.length() > 225){
                         %><%=movie.description.substring(0, 225)%><%}else{%><%=movie.description%><%}%>
                         ...</p>
-                        <button class="btn btn-outline-primary">More Details...</button>
+                        <button class="btn btn-outline-primary" onclick="document.location='./movie.jsp?movieId=<%=movie.TMDBid%>'">More Details...</button>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                     <div class="card-img-overlay d-flex flex-column align-items-center justify-content-around">
                         <h5 class="card-title"><%=movie.title%></h5>
                         <p class="card-text"><%=movie.description.substring(0, 225)%>...</p>
-                        <button class="btn btn-outline-primary">More Details...</button>
+                        <button class="btn btn-outline-primary" onclick="document.location='./movie.jsp?movieId=<%=movie.TMDBid%>'">More Details...</button>
                     </div>
                 </div>
             </div>

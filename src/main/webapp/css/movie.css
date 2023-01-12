@@ -11,9 +11,14 @@
     bottom: 0;
 }
 .cover .details h1 {
+    font-size: 5rem;
     font-weight: 700;
+    text-shadow: 3px 3px 4px black;
 }
-
+.cover .details h3 {
+    text-shadow: 3px 3px 4px black;
+    font-size: 3rem;
+}
 .cover .details span i{
     color: var(--special-color)
 }

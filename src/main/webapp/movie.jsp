@@ -27,7 +27,7 @@
             <h3><%=movie.title.split(":")[1]%></h3>
             <%}%>
 
-            <div class="tags d-flex gap-3">
+            <div class="tags my-4 d-flex gap-3">
                 <%for(String genre : movie.genres){%>
                     <div class="tag p-1 rounded"><%=genre%></div>
                 <%}%>
