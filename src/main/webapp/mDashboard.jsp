@@ -1,6 +1,13 @@
 <%@ page import="com.example.ticketbookingsystem.User" %>
 <%@ page import="org.bson.types.ObjectId" %>
-<%@ page import="com.example.ticketbookingsystem.UserStruct" %><% //restrict accessing through url
+<%@ page import="com.example.ticketbookingsystem.UserStruct" %>
+<%@ page import="com.example.ticketbookingsystem.Movie" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<% //restrict accessing through url
     if(session.getAttribute("userID") == null){
         response.sendRedirect("./index.jsp");
         return;
@@ -23,6 +30,27 @@
     <script defer src="./jquery/jquery-ui.multidatespicker.js"></script>
     <script defer src="./js/mDashboard.js"></script>
 <%@include file="./nav.jsp" %>
+<%
+    Movie movie = new Movie();
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    List<String> time1 = new ArrayList<>();
+    for (Date date: movie.getDates("9:00")) {
+        time1.add(String.format("'%s'", dateFormat.format(date)));
+    }
+    List<String> time2 = new ArrayList<>();
+    for (Date date: movie.getDates("13:00")) {
+        time2.add(String.format("'%s'", dateFormat.format(date)));
+    }
+    List<String> time3 = new ArrayList<>();
+    for (Date date: movie.getDates("16:00")) {
+        time3.add(String.format("'%s'", dateFormat.format(date)));
+    }
+%>
+<script>
+    var time1array = <%=time1%>
+    var time2array = <%=time2%>
+    var time3array = <%=time3%>
+</script>
 <!-- Menu -->
     <div class="menu menu-left" id="menu">
         <ul class="menu-bar">
@@ -285,17 +313,20 @@
                 <div class="col-12 p-3">
                     <div class="content p-3 rounded">
                         <h3 class="text-center">Insert Movie</h3>
-                        <form action="" method="GET" class="row g-4">
+                        <form action="./insertMovieServlet" method="POST" class="row g-4">
                             <div class="col-lg-6">
-                                <label for="name" class="form-label">Movie Name</label>
-                                <input type="text" class="form-control" id="name" placeholder="Enter movie name">
+                                <div class="row align-items-center justify-content-between">
+                                    <div class="col-10">
+                                        <label for="moviename" class="form-label">Movie Name</label>
+                                        <input type="text" class="form-control" id="moviename" placeholder="Enter movie name">
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-outline-primary" id="searchmovie" type="button"><i class="fa-light fa-search"></i></button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-lg-6">
-                                <label for="slogan" class="form-label">Movie Slogan</label>
-                                <input type="text" class="form-control" id="slogan" placeholder="Enter movie slogan">
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="timeslot" class="form-label d-block">Time Slot : </label>
+                                <label for="time1" class="form-label d-block">Time Slot : </label>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="timeslot" id="time1" value="9:00">
                                     <label class="form-check-label" for="time1">9:00</label>
@@ -310,19 +341,8 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <label for="movietype" class="form-label d-block">Movie Status : </label>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="movietype" id="released" value="released">
-                                    <label class="form-check-label" for="released">Released</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="movietype" id="Upcoming" value="upcoming">
-                                    <label class="form-check-label" for="Upcoming">Upcoming</label>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="slogan" class="form-label">Movie Dates</label>
-                                <input type="text" class="form-control showdates" placeholder="Pick the Movie dates" autocomplete="off" name="showdates">
+                                <label for="showdates" class="form-label">Movie Dates</label>
+                                <input type="text" id="showdates" class="form-control" placeholder="Pick the Movie dates" autocomplete="off" name="showdates">
                             </div>
                             <div class="col-lg-6">
                                 <label for="price" class="form-label">Ticket Price</label>
@@ -340,6 +360,29 @@
                             </div>
                         </form>
                     </div>
+                    <div class="content my-3 p-3" id="searchsection">
+                        <h5>Search Result</h5>
+                        <div class="row g-4">
+                            <div class="col-lg-6">
+                                <label for="searchname" class="form-label">Movie Name</label>
+                                <input type="text" class="form-control" id="searchname" disabled>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="searchgenres" class="form-label">Genres</label>
+                                <input type="text" class="form-control" id="searchgenres" disabled>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="searchoverview" class="form-label">Overview</label>
+                                <input type="text" class="form-control" id="searchoverview" disabled>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="searchgenres" class="form-label">Genres</label><br/>
+                                <a href="" target="_blank" id="poster">Poster</a><br>
+                                <a href="" target="_blank" id="banner">Banner</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden-div"></div>
                 </div>
             </div>
         <!-- Settings Display -->
