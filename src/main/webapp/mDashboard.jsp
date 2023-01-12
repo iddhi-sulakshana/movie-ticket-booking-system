@@ -1,8 +1,18 @@
-<% //restrict accessing through url
+<%@ page import="com.example.ticketbookingsystem.User" %>
+<%@ page import="org.bson.types.ObjectId" %>
+<%@ page import="com.example.ticketbookingsystem.UserStruct" %><% //restrict accessing through url
+    if(session.getAttribute("userID") == null){
+        response.sendRedirect("./index.jsp");
+        return;
+    }
+    ObjectId userId = (ObjectId) session.getAttribute("userID");
     String role = (String) session.getAttribute("logRole");
+    User userObj = new User();
     if (role != "admin") {
         response.sendRedirect("index.jsp");
+        return;
     }
+    UserStruct user = userObj.getUser(userId);
 %>
 <%@include file="./header.jsp" %>
     <title>ABC Movies</title>
@@ -336,24 +346,32 @@
             <div class="settings px-2 row row d-none">
                 <div class="col-12 p-3">
                     <div class="content p-3 rounded">
-                        <form action="#">
+                        <form action="./updateUserServlet" method="post">
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="lName">Full name</label>
+                                <input type="text" class="form-control" id="lName" name="fullname" placeholder="Enter full name" value="<%=user.fullName%>" disabled required>
+                            </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="email">Email address</label>
-                                <input type="email" id="email" class="form-control" placeholder="Email..." value="123@gmail.com" disabled required>
+                                <input type="email" id="email" class="form-control" placeholder="Email..." name="email" value="<%=user.email%>" disabled required>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="phoneNo">Phone Number</label>
+                                <input type="text" id="phoneNo" class="form-control" placeholder="Phone No...." name="phone" value="<%=user.phone%>" disabled required>
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="password">Password</label>
-                                <input type="password" id="password" class="form-control" placeholder="Password...." value="12345678" disabled required=""/>
+                                <input type="password" id="password" class="form-control" placeholder="Password...." name="password" value="<%=user.password%>" disabled required=""/>
                             </div>
                             <div class="row gap-2 text-center">
                                 <div class="col">
-                                    <button type="button" id="logout" class="btn btn-outline-danger">Log out</button>
+                                    <button type="button" class="btn btn-outline-danger" onclick="location.href= './logoutServlet'">Log out</button>
                                 </div>
                                 <div class="col">
                                     <button type="button" id="editAcc" class="btn btn-outline-warning">Edit Account</button>
                                 </div>
                                 <div class="col">
-                                    <button type="submit" id="saveAcc" disabled class="btn btn-outline-success">Save Changes</button>
+                                    <button type="submit" disabled id="saveAcc" class="btn btn-outline-success">Save Changes</button>
                                 </div>
                             </div>
                         </form>

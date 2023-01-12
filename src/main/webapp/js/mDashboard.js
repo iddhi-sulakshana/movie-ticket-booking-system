@@ -80,11 +80,6 @@ edit.addEventListener('click', () => {
     removeDisable(save)
     addDisable(edit)
 })
-save.addEventListener('click', () => {
-    inputs.forEach(addDisable)
-    addDisable(save)
-    removeDisable(edit)
-})
 function removeDisable(input){
     input.removeAttribute('disabled')
 }

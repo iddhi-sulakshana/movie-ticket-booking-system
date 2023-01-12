@@ -47,6 +47,7 @@ public class loginServlet extends HttpServlet {
                         response.sendRedirect("index.jsp");
                         break;
                 }
+                session.setAttribute("userID", user._id);
 
 
             } else {
