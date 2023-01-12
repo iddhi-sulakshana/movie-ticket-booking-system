@@ -41,7 +41,7 @@ public class insertMovieServlet extends HttpServlet {
             showdates.add(new Date(date));
         }
         int success = movie.insertMovie(id, showdates, request.getParameter("timeslot"), Double.parseDouble(request.getParameter("price")));
-        System.out.println(success);
+        movie.close();
         if(success == 1) {
             session.setAttribute("error", "Movie already Exist");
         }

@@ -13,6 +13,7 @@
         return;
     }
     UserStruct user = userObj.getUser(userId);
+    userObj.close();
 %>
 <%@include file="./header.jsp" %>
     <title>ABC Movies</title>

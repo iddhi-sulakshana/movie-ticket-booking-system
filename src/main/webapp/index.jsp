@@ -15,6 +15,7 @@
     Movie movieObj = new Movie();
     List<MovieStruct> movies = movieObj.getMovies();
     MovieStruct popular = movies.get(movies.size() - 1);
+    movieObj.close();
 %>
 <!-- Cover -->
 

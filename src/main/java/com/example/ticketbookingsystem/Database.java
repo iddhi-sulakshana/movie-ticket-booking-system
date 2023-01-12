@@ -20,4 +20,8 @@ class Database {
         mongoClient = MongoClients.create(uri);
         database = mongoClient.getDatabase(dbName).withCodecRegistry(pojoCodecRegistry);
     }
+    public void close(){
+        mongoClient.close();
+        database = null;
+    }
 }

@@ -26,6 +26,7 @@ public class updateUserServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         if(user == null){
+            userObj.close();
             response.sendRedirect("./login.jsp");
             return;
         }
@@ -38,6 +39,7 @@ public class updateUserServlet extends HttpServlet {
         if(password != user.password && password != null)
             user.password = password;
         userObj.updateUser(user);
+        userObj.close();
         response.sendRedirect("./login.jsp");
     }
 }
