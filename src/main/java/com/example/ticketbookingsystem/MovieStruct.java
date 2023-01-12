@@ -12,4 +12,9 @@ public class MovieStruct {
     public List<String> showdates;
     public String       showtime;
     public String       description;
+    @Override
+    public String toString() {
+        return String.format("TMDBid:\t%d\ntitle:\t%s\ngenres:\t%s\nposter:\t%s\nbanner:\t%s\nshowdates:\t%s\nshowtime:\t%s\ndescription:\t%s\n",
+                TMDBid,title, genres,poster,banner,showdates,showtime, description);
+    }
 }
