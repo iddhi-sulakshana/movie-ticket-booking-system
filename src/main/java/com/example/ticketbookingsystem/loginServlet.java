@@ -40,13 +40,13 @@ public class loginServlet extends HttpServlet {
                     case "frontdesk":
                         //frontdest account
                         session.setAttribute("logRole", "frontdesk");
-                        response.sendRedirect("index.jsp");
+                        response.sendRedirect("uDashboard.jsp");
 
                         break;
                     default:
                         //user account
                         session.setAttribute("logRole", "user");
-                        response.sendRedirect("index.jsp");
+                        response.sendRedirect("uDashboard.jsp");
                         break;
                 }
                 session.setAttribute("userID", user._id);
