@@ -2,7 +2,10 @@
 <%@ page import="com.example.ticketbookingsystem.MovieStruct" %>
 <%@ page import="com.example.ticketbookingsystem.tmdbAPI" %>
 <%@ page import="java.net.URL" %>
+<%@ page import="java.util.List" %>
 <%@include file="./header.jsp" %>
+<%
+%>
     <title>ABC Movies</title>
     <link rel="stylesheet" href="./css/home.css">
 <script defer src="./jquery/jquery.min.js"></script>

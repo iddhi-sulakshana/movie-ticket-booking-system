@@ -10,9 +10,10 @@ public class MovieStruct {
     public List<String> genres;
     public String       poster;
     public String       banner;
-    public List<Date> showdates;
+    public List<Date>   showdates;
     public String       showtime;
     public String       description;
+    public double       price;
     @Override
     public String toString() {
         return String.format("TMDBid:\t%d\ntitle:\t%s\ngenres:\t%s\nposter:\t%s\nbanner:\t%s\nshowdates:\t%s\nshowtime:\t%s\ndescription:\t%s\n",

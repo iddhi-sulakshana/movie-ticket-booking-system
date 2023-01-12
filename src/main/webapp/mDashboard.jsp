@@ -7,8 +7,10 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.ticketbookingsystem.MovieStruct" %>
 <% //restrict accessing through url
     if(session.getAttribute("userID") == null){
+        session.setAttribute("error", "Log in timeout");
         response.sendRedirect("./index.jsp");
         return;
     }
@@ -16,6 +18,7 @@
     String role = (String) session.getAttribute("logRole");
     User userObj = new User();
     if (role != "admin") {
+        session.setAttribute("error", "Unauthorized page");
         response.sendRedirect("index.jsp");
         return;
     }
@@ -45,6 +48,8 @@
     for (Date date: movie.getDates("16:00")) {
         time3.add(String.format("'%s'", dateFormat.format(date)));
     }
+
+    List<MovieStruct> movies = movie.getMovies();
 %>
 <script>
     var time1array = <%=time1%>
@@ -81,33 +86,11 @@
                     <div class="content p-3 rounded">
                         <h1 class="text-center">Movies</h1>
                         <div class="row row-cols-1 p-3 px-5 gap-3">
+                            <% for(MovieStruct item : movies) {%>
                             <div class="col sub-card rounded p-1 position-relative">
-                                <div class="title">Spider Man</div>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded bg-danger">
-                                    Live
-                                </span>
+                                <div class="title"><%=item.title%></div>
                             </div>
-                            <div class="col sub-card rounded p-1 position-relative">
-                                <div class="title">Black Adam</div>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded bg-success">
-                                    Next
-                                </span>
-                            </div>
-                            <div class="col sub-card rounded p-1">
-                                <div class="title">Black Adam</div>
-                            </div>
-                            <div class="col sub-card rounded p-1">
-                                <div class="title">Black Adam</div>
-                            </div>
-                            <div class="col sub-card rounded p-1">
-                                <div class="title">Black Adam</div>
-                            </div>
-                            <div class="col sub-card rounded p-1">
-                                <div class="title">Black Adam</div>
-                            </div>
-                            <div class="col sub-card rounded p-1">
-                                <div class="title">Black Adam</div>
-                            </div>
+                            <%}%>
                         </div>
                     </div>
                 </div>
@@ -147,24 +130,27 @@
             </div>
         <!-- Movies display -->
             <div class="movies p-3 row row-cols-1 row-cols-md-3 g-3 row-cols-lg-4 d-none">
+                <%  int i = 0;
+                    for(MovieStruct item : movies) {%>
                 <!-- movie -->
                     <div class="col text-center">
                         <div class="content p-3 rounded">
-                            <h4>Spider Man</h4>
-                            <h5>far from the home</h5>
-                            <button class="btn btn-outline-primary m-2" type="button" data-bs-toggle="collapse" data-bs-target="#showtime" aria-expanded="false" aria-controls="showtime">
+                            <h4><%=item.title.split(":")[0]%></h4>
+                            <%
+                                if(item.title.split(":").length == 2) {
+                            %>
+                            <h5><%=item.title.split(":")[1]%></h5>
+                            <%}%>
+                            <button class="btn btn-outline-primary m-2" type="button" data-bs-toggle="collapse" data-bs-target="#showtime<%=i%>" aria-expanded="false" aria-controls="showtime<%=i%>">
                                 Show Times
                             </button>
-                            <div class="collapse" id="showtime">
+                            <div class="collapse" id="showtime<%=i%>">
                                 <div class="card card-body text-bg-dark">
-                                <div class="row g-2 row-cols-1">
-                                    <div class="col text-decoration-line-through">2022-02-04 22:30</div>
-                                    <div class="col text-decoration-line-through">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                </div>
+                                    <div class="row g-2 row-cols-1">
+                                        <% for(Date date : item.showdates){%>
+                                            <div class="col<%if(date.before(new Date())){%> text-decoration-line-through<%}%>"><%=dateFormat.format(date)%></div>
+                                        <%}%>
+                                    </div>
                                 </div>
                             </div>
                             <hr>
@@ -179,134 +165,8 @@
                         </div>
                     </div>
                 <!-- end movie -->
-                <!-- movie -->
-                    <div class="col text-center">
-                        <div class="content p-3 rounded">
-                            <h4>Spider Man</h4>
-                            <h5>far from the home</h5>
-                            <button class="btn btn-outline-primary m-2" type="button" data-bs-toggle="collapse" data-bs-target="#showtime1" aria-expanded="false" aria-controls="showtime1">
-                                Show Times
-                            </button>
-                            <div class="collapse" id="showtime1">
-                                <div class="card card-body text-bg-dark">
-                                <div class="row g-2 row-cols-1">
-                                    <div class="col text-decoration-line-through">2022-02-04 22:30</div>
-                                    <div class="col text-decoration-line-through">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row g-2">
-                                <div class="col">
-                                    <button class="btn btn-outline-danger">Delete</button>
-                                </div>
-                                <div class="col">
-                                    <button class="btn btn-outline-success">Edit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <!-- end movie -->
-                <!-- movie -->
-                    <div class="col text-center">
-                        <div class="content p-3 rounded">
-                            <h4>Spider Man</h4>
-                            <h5>far from the home</h5>
-                            <button class="btn btn-outline-primary m-2" type="button" data-bs-toggle="collapse" data-bs-target="#showtime2" aria-expanded="false" aria-controls="showtime2">
-                                Show Times
-                            </button>
-                            <div class="collapse" id="showtime2">
-                                <div class="card card-body text-bg-dark">
-                                <div class="row g-2 row-cols-1">
-                                    <div class="col text-decoration-line-through">2022-02-04 22:30</div>
-                                    <div class="col text-decoration-line-through">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row g-2">
-                                <div class="col">
-                                    <button class="btn btn-outline-danger">Delete</button>
-                                </div>
-                                <div class="col">
-                                    <button class="btn btn-outline-success">Edit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <!-- end movie -->
-                <!-- movie -->
-                    <div class="col text-center">
-                        <div class="content p-3 rounded">
-                            <h4>Spider Man</h4>
-                            <h5>far from the home</h5>
-                            <button class="btn btn-outline-primary m-2" type="button" data-bs-toggle="collapse" data-bs-target="#showtime3" aria-expanded="false" aria-controls="showtime3">
-                                Show Times
-                            </button>
-                            <div class="collapse" id="showtime3">
-                                <div class="card card-body text-bg-dark">
-                                <div class="row g-2 row-cols-1">
-                                    <div class="col text-decoration-line-through">2022-02-04 22:30</div>
-                                    <div class="col text-decoration-line-through">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row g-2">
-                                <div class="col">
-                                    <button class="btn btn-outline-danger">Delete</button>
-                                </div>
-                                <div class="col">
-                                    <button class="btn btn-outline-success">Edit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <!-- end movie -->
-                <!-- movie -->
-                    <div class="col text-center">
-                        <div class="content p-3 rounded">
-                            <h4>Spider Man</h4>
-                            <h5>far from the home</h5>
-                            <button class="btn btn-outline-primary m-2" type="button" data-bs-toggle="collapse" data-bs-target="#showtime4" aria-expanded="false" aria-controls="showtime4">
-                                Show Times
-                            </button>
-                            <div class="collapse" id="showtime4">
-                                <div class="card card-body text-bg-dark">
-                                <div class="row g-2 row-cols-1">
-                                    <div class="col text-decoration-line-through">2022-02-04 22:30</div>
-                                    <div class="col text-decoration-line-through">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                    <div class="col">2022-02-04 22:30</div>
-                                </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row g-2">
-                                <div class="col">
-                                    <button class="btn btn-outline-danger">Delete</button>
-                                </div>
-                                <div class="col">
-                                    <button class="btn btn-outline-success">Edit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <!-- end movie -->
+                <%i++;}%>
+                <div class="hidden-div"></div>
             </div>
         <!-- Insert Movie Display -->
             <div class="add px-2 row row d-none">
@@ -315,10 +175,10 @@
                         <h3 class="text-center">Insert Movie</h3>
                         <form action="./insertMovieServlet" method="POST" class="row g-4">
                             <div class="col-lg-6">
+                                <label for="moviename" class="form-label">Movie Name</label>
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-10">
-                                        <label for="moviename" class="form-label">Movie Name</label>
-                                        <input type="text" class="form-control" id="moviename" placeholder="Enter movie name">
+                                        <input type="text" class="form-control" id="moviename" name="moviename" placeholder="Enter movie name" required>
                                     </div>
                                     <div class="col">
                                         <button class="btn btn-outline-primary" id="searchmovie" type="button"><i class="fa-light fa-search"></i></button>
@@ -328,25 +188,25 @@
                             <div class="col-lg-6">
                                 <label for="time1" class="form-label d-block">Time Slot : </label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="timeslot" id="time1" value="9:00">
+                                    <input class="form-check-input" type="radio" name="timeslot" id="time1" value="9:00" required>
                                     <label class="form-check-label" for="time1">9:00</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="timeslot" id="time2" value="13:00">
+                                    <input class="form-check-input" type="radio" name="timeslot" id="time2" value="13:00" required>
                                     <label class="form-check-label" for="time2">13:00</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="timeslot" id="time3" value="16:00">
+                                    <input class="form-check-input" type="radio" name="timeslot" id="time3" value="16:00" required>
                                     <label class="form-check-label" for="time3">16:00</label>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <label for="showdates" class="form-label">Movie Dates</label>
-                                <input type="text" id="showdates" class="form-control" placeholder="Pick the Movie dates" autocomplete="off" name="showdates">
+                                <input type="text" id="showdates" class="form-control" hidden placeholder="Pick the Movie dates" autocomplete="off" name="showdates" required>
                             </div>
                             <div class="col-lg-6">
                                 <label for="price" class="form-label">Ticket Price</label>
-                                <input type="text" class="form-control" id="price" placeholder="Ticket Price">
+                                <input type="text" class="form-control" id="price" placeholder="Ticket Price" name="price" required>
                             </div>
                             <div class="col-12">
                                 <div class="row g-4">

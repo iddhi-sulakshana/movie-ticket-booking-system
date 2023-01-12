@@ -68,7 +68,15 @@ $(document).ready( function () {
         }
     })
 })
-
+document.getElementsByName("timeslot").forEach((e) => {
+    e.addEventListener('click', clickTime);
+})
+function clickTime(e){
+    document.getElementById("showdates").removeAttribute("hidden");
+    document.getElementsByName("timeslot").forEach((e) => {
+        e.removeEventListener('click', clickTime)
+    })
+}
 const inputs = document.querySelectorAll('.form-outline input')
 const edit = document.getElementById('editAcc')
 const save = document.getElementById('saveAcc')
