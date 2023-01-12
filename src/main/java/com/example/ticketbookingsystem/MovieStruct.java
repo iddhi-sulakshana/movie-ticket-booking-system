@@ -1,6 +1,7 @@
 package com.example.ticketbookingsystem;
 
 
+import java.util.Date;
 import java.util.List;
 
 public class MovieStruct {
@@ -9,7 +10,7 @@ public class MovieStruct {
     public List<String> genres;
     public String       poster;
     public String       banner;
-    public List<String> showdates;
+    public List<Date> showdates;
     public String       showtime;
     public String       description;
     @Override

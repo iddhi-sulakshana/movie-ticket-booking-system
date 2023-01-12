@@ -1,16 +1,17 @@
 package com.example.ticketbookingsystem;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Updates;
 import org.bson.BsonArray;
-import org.bson.BsonDocument;
 import org.bson.BsonString;
-import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import static com.mongodb.client.model.Aggregates.set;
@@ -34,7 +35,7 @@ public class Movie extends Database{
         }
         collection.updateOne(eq("TMDBid", id), Updates.combine(Updates.set("showdates", array), Updates.set("showtime", showtime)));
     }
-    public void insertMovie(String title, List<String> showdates, String showtime) throws IOException {
+    public void insertMovie(String title, List<Date> showdates, String showtime) throws IOException {
         tmdbAPI api = new tmdbAPI();
         MovieStruct movie = api.getMovie(api.searchMovie(title));
         movie.showdates = showdates;
@@ -49,4 +50,18 @@ public class Movie extends Database{
             return 0;
         return 1;
     }
+    public List<Date> getDates(String showtime) {
+        List<Date> showdates = new ArrayList<>();
+        FindIterable<MovieStruct> movies = collection.find(eq("showtime", showtime));
+        Iterator<MovieStruct> iterator = movies.iterator();
+        while(iterator.hasNext()){
+            for(Date date : iterator.next().showdates){
+                if(!showdates.contains(date)){
+                    showdates.add(date);
+                }
+            }
+        }
+        return showdates;
+    }
+
 }
