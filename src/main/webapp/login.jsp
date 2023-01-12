@@ -27,7 +27,7 @@
 					<div class="slider-tab"></div>
 				</div>
 				<div class="form-inner">
-					<form name="logInForm" action="loginServlet" class="login" method="post">
+					<form name="logInForm" action="./loginServlet" class="login" method="post">
 						<div class="field">
 							<input class="npt" name="email" type="text" placeholder="Email Address" required>
 						</div>
@@ -54,18 +54,18 @@
 						</div>
 						<div class="signup-link">don't have an account?<a href="" style="color: #0000FF;"> Signup Now</a></div>
 					</form>
-					<form name="signInForm" action="#" class="signup" method="post">
+					<form name="signInForm" action="signupServlet" class="signup" method="post">
 						<div class="field">
-							<input type="text" placeholder="Full Name" required>
+							<input type="text" placeholder="Full Name" name="fullname" required>
 						</div>
 						<div class="field">
-							<input type="text" placeholder="Email" required>
+							<input type="text" placeholder="Email" name="email" required>
 						</div>
 						<div class="field">
-							<input type="text" placeholder="Phone" required>
+							<input type="text" placeholder="Phone" name="phone" required>
 						</div>
 						<div class="field">
-							<input type="password" placeholder="Password" required>
+							<input type="password" placeholder="Password" name="password" required>
 						</div>
 						<div class="field">
 							<input type="password" placeholder="Confirm password" required>

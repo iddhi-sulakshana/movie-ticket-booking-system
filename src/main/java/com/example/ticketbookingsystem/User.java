@@ -22,6 +22,9 @@ public class User extends Database{
             return 1;
         return -1;
     }
+    public void createUser(UserStruct user){
+        collection.insertOne(user);
+    }
     public void deleteUser(ObjectId _id){
         collection.findOneAndDelete(eq("_id", _id));
     }
@@ -33,6 +36,17 @@ public class User extends Database{
                 Updates.set("fullName", update.fullName)
         ));
     };
-
+    public int isExistEmail(String email){
+        UserStruct found = collection.find(eq("email", email)).first();
+        if(found != null)
+            return 1;
+        return 0;
+    }
+    public int isExistPhone(String phone){
+        UserStruct found = collection.find(eq("phone", phone)).first();
+        if(found != null)
+            return 1;
+        return 0;
+    }
 }
 
