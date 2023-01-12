@@ -54,7 +54,7 @@
 						</div>
 						<div class="signup-link">don't have an account?<a href="" style="color: #0000FF;"> Signup Now</a></div>
 					</form>
-					<form name="signInForm" action="signupServlet" class="signup" method="post">
+					<form name="signInForm" action="./signupServlet" class="signup" method="post">
 						<div class="field">
 							<input type="text" placeholder="Full Name" name="fullname" required>
 						</div>

@@ -1,5 +1,7 @@
 package com.example.ticketbookingsystem;
 
+import com.example.ticketbookingsystem.User;
+import com.example.ticketbookingsystem.UserStruct;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
