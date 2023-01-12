@@ -1,21 +1,20 @@
 <%@ page import="com.example.ticketbookingsystem.Movie" %>
 <%@ page import="com.example.ticketbookingsystem.MovieStruct" %>
+<%@ page import="com.example.ticketbookingsystem.tmdbAPI" %>
+<%@ page import="java.net.URL" %>
 <%@include file="./header.jsp" %>
     <title>ABC Movies</title>
     <link rel="stylesheet" href="./css/home.css">
     <script defer src="./js/home.js"></script>
 <%@include file="./nav.jsp" %>
 <!-- Cover -->
-    <% Movie movieobj = new Movie();
-        MovieStruct movie = movieobj.getMovie(76600);
-        String posterpath = movie.banner;
-    %>
-    <div id="hero" class="p-lg-5 p-0" style="background-image: url('https://image.tmdb.org/t/p/original<%=posterpath%>');">
+
+    <div id="hero" class="p-lg-5 p-0" style="background-image: url('https://image.tmdb.org/t/p/original');">
         <div class="container h-100 d-flex align-items-center">
             <div class="cover">
-                <h1 class="display-1 cover-header"><%= movie.title %></h1>
+                <h1 class="display-1 cover-header"></h1>
                 <p class="w-lg-50 cover-description">
-                    <%=movie.description%>
+
                 </p>
                 <button class="btn btn-lg btn-primary">Book now</button>
                 <button class="btn btn-lg btn-success mx-2">More...</button>
