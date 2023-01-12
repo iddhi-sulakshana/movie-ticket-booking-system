@@ -51,7 +51,11 @@
                     <img src="https://image.tmdb.org/t/p/original<%=movie.poster%>" alt="card-img">
                     <div class="card-img-overlay d-flex flex-column align-items-center justify-content-around">
                         <h5 class="card-title"><%=movie.title%></h5>
-                        <p class="card-text"><%=movie.description.substring(0, 225)%>...</p>
+                        <p class="card-text">
+                        <%
+                            if(movie.description.length() > 225){
+                        %><%=movie.description.substring(0, 225)%><%}else{%><%=movie.description%><%}%>
+                        ...</p>
                         <button class="btn btn-outline-primary">More Details...</button>
                     </div>
                 </div>

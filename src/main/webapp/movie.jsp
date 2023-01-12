@@ -1,28 +1,43 @@
+<%@ page import="com.example.ticketbookingsystem.Movie" %>
+<%@ page import="com.example.ticketbookingsystem.Essentials" %>
+<%@ page import="com.example.ticketbookingsystem.MovieStruct" %>
 <%@include file="./header.jsp" %>
     <title>ABC Movies</title>
     <link rel="stylesheet" href="./css/movie.css">
-    <script defer src="./js/movie.js"></script>
 <%@include file="./nav.jsp" %>
+<%
+    Movie movieObj = new Movie();
+    Essentials es = new Essentials();
+    if(request.getParameter("movieId").trim() == null || !es.isInt(request.getParameter("movieId"))){
+        session.setAttribute("error", "Invalid request");
+        response.sendRedirect("./");
+        return;
+    }
+    MovieStruct movie = new MovieStruct();
+    movie.TMDBid = Integer.parseInt(request.getParameter("movieId"));
+    movie = movieObj.getMovie(movie.TMDBid);
+%>
 <!-- Section -->
-    <div class="container rounded cover my-2" style="background-image: url(./assets/cover/cover2.jpg);">
+    <div class="container rounded cover my-2" style="background-image: url('https://image.tmdb.org/t/p/original<%=movie.banner%>');">
         <div class="details p-4 w-md-25">
-            <h1>Jumanji</h1>
-            <h3>Welcome to the jungle</h3>
-            <span><i class="fa-light fa-star"></i><i class="fa-light fa-star"></i><i class="fa-light fa-star"></i><i class="fa-light fa-star"></i><i class="fa-light fa-star-half"></i></span>
+            <h1><%=movie.title.split(":")[0]%></h1>
+            <%
+                if(movie.title.split(":").length == 2) {
+            %>
+            <h3><%=movie.title.split(":")[1]%></h3>
+            <%}%>
+
             <div class="tags d-flex gap-3">
-                <div class="tag p-1 rounded">Action</div>
-                <div class="tag p-1 rounded">Adventure</div>
+                <%for(String genre : movie.genres){%>
+                    <div class="tag p-1 rounded"><%=genre%></div>
+                <%}%>
             </div>
-        </div>
-        <button class="btn btn-outline-info rounded-pill play-btn"><i class="fa-light fa-play"></i></button>
-        <div class="video-wrapper">
-            <iframe src="https://www.youtube-nocookie.com/embed/2QKg5SZ_35I?controls=0" title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media;"></iframe>
         </div>
     </div>
     <div class="container my-3 rounded p-3">
         <div class="row align-items-center">
             <div class="col-lg-10">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quos, ratione ad ea repellendus pariatur porro dolorem harum. Hic tenetur aliquam odio cumque a ex nisi explicabo iste molestiae minus!</p>    
+                <p><%=movie.description%></p>
             </div>
             <div class="col-lg-auto">
                 <button class="btn btn-lg w-100 btn-outline-success" onclick="document.location='./selectSeat.html'">Book Now</button>
