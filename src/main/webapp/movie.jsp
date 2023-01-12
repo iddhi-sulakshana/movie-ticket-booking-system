@@ -16,6 +16,7 @@
     MovieStruct movie = new MovieStruct();
     movie.TMDBid = Integer.parseInt(request.getParameter("movieId"));
     movie = movieObj.getMovie(movie.TMDBid);
+    movieObj.close();
 %>
 <!-- Section -->
     <div class="container rounded cover my-2" style="background-image: url('https://image.tmdb.org/t/p/original<%=movie.banner%>');">
@@ -40,7 +41,7 @@
                 <p><%=movie.description%></p>
             </div>
             <div class="col-lg-auto">
-                <button class="btn btn-lg w-100 btn-outline-success" onclick="document.location='./selectSeat.html'">Book Now</button>
+                <button class="btn btn-lg w-100 btn-outline-success" onclick="document.location='./selectSeat.jsp'">Book Now</button>
             </div>
         </div>
     </div>

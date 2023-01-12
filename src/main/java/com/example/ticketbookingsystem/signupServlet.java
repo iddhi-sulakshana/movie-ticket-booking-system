@@ -38,6 +38,7 @@ public class signupServlet extends HttpServlet {
             return;
         }
         userObj.createUser(user);
+        userObj.close();
         response.sendRedirect("./login.jsp");
     }
 }

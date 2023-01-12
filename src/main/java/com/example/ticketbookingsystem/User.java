@@ -16,12 +16,6 @@ public class User extends Database{
     public UserStruct getUser(ObjectId _id) {
         return collection.find(eq("_id", _id)).first();
     }
-    public int isExist(ObjectId _id){
-        UserStruct user = getUser(_id);
-        if(user != null)
-            return 1;
-        return -1;
-    }
     public void createUser(UserStruct user){
         collection.insertOne(user);
     }

@@ -23,6 +23,7 @@
         return;
     }
     UserStruct user = userObj.getUser(userId);
+    userObj.close();
 %>
 <%@include file="./header.jsp" %>
     <title>ABC Movies</title>
@@ -50,6 +51,7 @@
     }
 
     List<MovieStruct> movies = movie.getMovies();
+    movie.close();
 %>
 <script>
     var time1array = <%=time1%>
