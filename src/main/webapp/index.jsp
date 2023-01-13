@@ -26,7 +26,7 @@
                 <p class="w-lg-50 cover-description">
                     <%=popular.description%>
                 </p>
-                <button class="btn btn-lg btn-primary" onclick="document.location='./selectSeat.html'">Book now</button>
+                <button class="btn btn-lg btn-primary" onclick="document.location='./selectSeat.jsp?movieId=<%=popular.TMDBid%>'">Book now</button>
                 <button class="btn btn-lg btn-success mx-2" onclick="document.location='./movie.jsp?movieId=<%=popular.TMDBid%>'">More...</button>
             </div>
         </div>
