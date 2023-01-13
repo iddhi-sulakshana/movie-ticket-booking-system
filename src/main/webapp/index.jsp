@@ -4,6 +4,8 @@
 <%@ page import="java.net.URL" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@include file="./header.jsp" %>
     <title>ABC Movies</title>
     <link rel="stylesheet" href="./css/home.css">
@@ -11,7 +13,8 @@
     <script defer src="./js/home.js"></script>
 <%@include file="./nav.jsp" %>
 <%
-    Date now = new Date();
+    DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+    int today = Integer.parseInt(dateFormat.format(new Date()));
     Movie movieObj = new Movie();
     List<MovieStruct> movies = movieObj.getMovies();
     MovieStruct popular = movies.get(movies.size() - 1);
@@ -38,8 +41,8 @@
         <% for(MovieStruct movie : movies) {
             boolean showing = false;
             // check movie date
-            for(Date date : movie.showdates){
-                if(date.before(now)){
+            for(String date : movie.showdates){
+                if(Integer.parseInt(String.join("", date.split("-"))) <= today){
                     showing = true;
                     break;
                 }
@@ -71,8 +74,8 @@
             <% for(MovieStruct movie : movies) {
                 boolean showing = false;
                 // check movie date
-                for(Date date : movie.showdates){
-                    if(date.before(now)){
+                for(String date : movie.showdates){
+                    if(Integer.parseInt(String.join("", date.split("-"))) <= today){
                         showing = true;
                         break;
                     }

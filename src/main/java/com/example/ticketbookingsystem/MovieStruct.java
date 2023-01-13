@@ -10,7 +10,7 @@ public class MovieStruct {
     public List<String> genres;
     public String       poster;
     public String       banner;
-    public List<Date>   showdates;
+    public List<String>   showdates;
     public String       showtime;
     public String       description;
     public double       price;
