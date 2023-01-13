@@ -36,18 +36,23 @@
                     <h4 class="text-md-right">Give us Feedback</h4>
                     <hr>
 
-                    <form method="post" action="#">
+                    <form method="post" action="">
                         <fieldset class="form-group">
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" required>
+                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" required>
                         </fieldset>
                         <br>
                         <fieldset class="form-group">
-                            <textarea class="form-control" id="exampleMessage" placeholder="Your Feedback" required></textarea>
+                            <textarea name="feedback" class="form-control" id="exampleMessage" placeholder="Your Feedback" required></textarea>
                         </fieldset>
                         <br>
                         <fieldset class="form-group text-xs-right">
                             <input style="color: #adff2f; border: none; background-color: transparent;" type="submit" value="Send">
                         </fieldset>
+<%--                        <input type="hidden" name="_template" value="box">--%>
+<%--                        <input type="hidden" name="_subject" value="Feedback From a User">--%>
+<%--                        <input type="hidden" name="_autoresponse" value="Thank you for your Feedback">--%>
+<%--                        <input type="hidden" name="_next" value="http://localhost:8080/TicketBookingSystem_war_exploded/">--%>
+
                     </form>
                 </div>
             </div>

@@ -17,12 +17,17 @@
         <junit.version>5.8.2</junit.version>
         <mongodb.version>4.8.0</mongodb.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
         </dependency>
         <dependency>
             <groupId>org.mongodb</groupId>
