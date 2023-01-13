@@ -43,6 +43,7 @@ async function initializeSeats(num){
         function(data) {
             if(data == ""){
                 alert("Server Error Try again");
+                location.reload()
                 return;
             }
             bookedSeats = JSON.parse(data);
