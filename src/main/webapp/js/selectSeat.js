@@ -1,4 +1,5 @@
 const seatnamelabel = document.querySelector('.seat-name');
+const movieIDinput = document.querySelector('input[name="movieId"');
 const pricelabel = document.querySelector('.price')
 const seatnameinput = document.getElementById('seat-name')
 const priceinput = document.getElementById('price')
@@ -12,31 +13,48 @@ moviedate.onchange = () => {
     initializeSeats(2)
 }
 
-const seats = document.querySelectorAll('.seat')
+const seats = document.querySelectorAll('.seat-wrapper .seat')
 const types = [ 'booked', 'free', 'selected']
 var seatNumbers = []
 var price = 0.00.toFixed(2)
-
-initializeSeats(1)
-function initializeSeats(num){
+seats.forEach((e) => {
+    e.classList.add("booked")
+})
+async function initializeSeats(num){
+    moviedate.setAttribute("disabled", '')
+    document.body.style.cursor = 'progress'
+    // clear values
     seatNumbers = []
     price = 0.00.toFixed(2)
     seatnamelabel.innerHTML = seatnameinput.value = seatNumbers
     pricelabel.innerHTML = priceinput.value = price
-    for(let i = 0; i < seats.length; i++) {
-        seats[i].classList.remove(types[0])
-        seats[i].classList.remove(types[1])
-        seats[i].classList.remove(types[2])
-    }
+    // remove all the types from the seats
+    seats.forEach((e) => {
+        e.classList.remove('booked')
+        e.classList.remove('free')
+        e.classList.remove('selected')
+        e.classList.add('booked')
+    })
+    if(moviedate.value == "")
+        return
+    let bookedSeats = []
     // assign seat types usually gets from the database
-    var seatTypes = []
-    for(let i = 0; i < seats.length; i++) {
-        seatTypes.push(Math.floor(Math.random() * num))
-    }
+    await $.post("./getBookedSeatsServlet", {movieId: movieIDinput.value, showDate: moviedate.value, showTime: movietime.value},
+        function(data) {
+            if(data == ""){
+                alert("Server Error Try again");
+                return;
+            }
+            bookedSeats = JSON.parse(data);
+        }
+    )
     // assign types to the seats
-    for(let i = 0; i < seats.length; i++) {
-        seats[i].classList.add(types[seatTypes[i]])
-    }
+    seats.forEach((e) => {
+        if(!bookedSeats.includes(getSeatNumber(e))){
+            e.classList.remove('booked')
+            e.classList.add('free')
+        }
+    })
     // add event listner to free and selected seats
     seats.forEach((e) => {
         if(e.classList.contains('booked'))
@@ -44,6 +62,8 @@ function initializeSeats(num){
         e.removeEventListener('click', clickSeat);
         e.addEventListener('click', clickSeat)
     })
+    document.body.style.cursor = 'default'
+    moviedate.removeAttribute("disabled")
 }
 
 function clickSeat(e){
@@ -83,13 +103,13 @@ function getDates(dates){
 
 // validate form
 document.getElementById('checkout-form').onsubmit = () => {
-    if(document.querySelector('input[name="moviename"').value == ''){
+    if(movieIDinput.value == ''){
         alert('Internal Error')
         window.location.replace('./')
         return false
     }
     if(moviedate.value == ''){
-        alert('Please select movie date')
+        alert('Please Select a Date')
         return false
     }
     if(seatnameinput.value == '' || priceinput.value == ''){

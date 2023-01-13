@@ -8,8 +8,8 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 
 
-@WebServlet(name = "Servlet", value = "/Servlet")
-public class Servlet extends HttpServlet {
+@WebServlet(name = "getMovieDetailsServlet", value = "/getMovieDetailsServlet")
+public class getMovieDetailsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/plain");

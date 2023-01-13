@@ -31,9 +31,6 @@
     for (String date: movie.showdates) {
         time1.add(String.format("'%s'", date));
     }
-    Ticket ticket = new Ticket();
-    ticket.getSeatsInMovie(movie.TMDBid, movie.showtime, time1.get(0));
-    ticket.close();
 %>
 <script>
     // get available dates from the server and put it on the
@@ -44,7 +41,7 @@
 <!-- Section -->
     <div class="container rounded p-3 my-3">
         <div class="row g-5 row-cols-1">
-            <div class="col p-3 text-center">
+            <div class="col text-center">
                 <h1><%=movie.title%></h1>
                 <form action="./checkout.jsp" id="checkout-form" novalidate>
                     <input type="text" name="movieId" value="<%=movie.TMDBid%>" hidden>
@@ -58,8 +55,22 @@
                 </div>
             </div>
             <div class="col d-flex flex-column align-items-center justify-content-center">
-                <h3 class="title my-3">Screen</h3>
+                <h3 class="title my-2">Screen</h3>
                 <img src="./assets/primary-images/screen.png" class="w-100" alt="">
+            </div>
+            <div class="col d-flex flex-row gap-4 align-items-center justify-content-center">
+                <div class="d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="seat booked"><div><span></span></div></div>
+                    Booked
+                </div>
+                <div class="d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="seat free"><div><span></span></div></div>
+                    Available
+                </div>
+                <div class="d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="seat selected"><div><span></span></div></div>
+                    Selected
+                </div>
             </div>
             <div class="col d-flex flex-column align-items-center justify-content-center">
                 <h3 class="title my-3">Seats</h3>
@@ -304,7 +315,7 @@
                     </div>
                     <div class="col">
                         <div class="checkout-title">Total Price</div>
-                        <div class="checkout-sub price">$150.00</div>
+                        <div class="checkout-sub price">150.00</div>
                     </div>
                     <div class="col">
                             <input type="text" name="seats" id="seat-name" hidden>

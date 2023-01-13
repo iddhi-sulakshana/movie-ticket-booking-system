@@ -114,7 +114,7 @@ searchbtn.onclick = () => {
     }
     searchbtn.classList.add('loading');
     clearvalues()
-    $.post("./Servlet", {moviename: moviename.value}, function(data) {
+    $.post("./getMovieDetailsServlet", {moviename: moviename.value}, function(data) {
         if(data == '-1') {
             alert("No matching movie found");
             searchbtn.classList.remove('loading')
