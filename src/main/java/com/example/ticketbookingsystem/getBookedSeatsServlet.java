@@ -20,9 +20,6 @@ public class getBookedSeatsServlet extends HttpServlet {
         showdate = String.join("-", showdate.split("/"));
         showdate = String.format("%s-%s-%s", showdate.split("-")[2], showdate.split("-")[0], showdate.split("-")[1]);
         String showtime = request.getParameter("showTime");
-        System.out.println(movieId);
-        System.out.println(showdate);
-        System.out.println(showtime);
         Ticket ticket = new Ticket();
         List<String> seats = ticket.getBookedSeats(movieId, showtime, showdate);
         ticket.close();

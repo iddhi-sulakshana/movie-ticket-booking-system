@@ -17,10 +17,8 @@ const seats = document.querySelectorAll('.seat-wrapper .seat')
 const types = [ 'booked', 'free', 'selected']
 var seatNumbers = []
 var price = 0.00.toFixed(2)
-seats.forEach((e) => {
-    e.classList.add("booked")
-})
-async function initializeSeats(num){
+initializeSeats()
+async function initializeSeats(){
     moviedate.setAttribute("disabled", '')
     document.body.style.cursor = 'progress'
     // clear values
@@ -35,8 +33,16 @@ async function initializeSeats(num){
         e.classList.remove('selected')
         e.classList.add('booked')
     })
-    if(moviedate.value == "")
+    gsap.from(".seat", {opacity: 0, scale:0, duration: 1.75, stagger: {
+            amount: 0.5,
+            grid: "auto",
+            from: "center"
+        }, ease: "elastic.out(0.8, 0.2)"})
+    if(moviedate.value == ""){
+        document.body.style.cursor = 'default'
+        moviedate.removeAttribute("disabled")
         return
+    }
     let bookedSeats = []
     // assign seat types usually gets from the database
     await $.post("./getBookedSeatsServlet", {movieId: movieIDinput.value, showDate: moviedate.value, showTime: movietime.value},
@@ -65,6 +71,11 @@ async function initializeSeats(num){
     })
     document.body.style.cursor = 'default'
     moviedate.removeAttribute("disabled")
+    gsap.from(".seat", {opacity: 0, scale:0, duration: 0.5, stagger: {
+            amount: 0.5,
+            grid: "auto",
+            from: "center"
+        }})
 }
 
 function clickSeat(e){
