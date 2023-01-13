@@ -108,7 +108,7 @@
                         <div class="col-md-4">
                             <div class="about-item-1 text-center">
                                 <img src="./assets/about/chamod1.jpeg" class="img-thumbnail" alt="">
-                                <h3>CHAMOD PERERA</h3>
+                                <h3>CHAMODH PERERA</h3>
                                 <hr>
                                 
                             </div>
