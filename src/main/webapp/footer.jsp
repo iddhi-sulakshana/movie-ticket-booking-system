@@ -1,4 +1,4 @@
-<%--    <%@include file="./displayError.jsp"%>--%>
+<%@include file="./displayError.jsp"%>
 <div class="footerCover">
     <footer class="footer">
         <div class="container">

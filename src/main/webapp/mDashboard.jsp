@@ -36,20 +36,20 @@
 <%@include file="./nav.jsp" %>
 <%
     Movie movie = new Movie();
-    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+    int today = Integer.parseInt(dateFormat.format(new Date()));
     List<String> time1 = new ArrayList<>();
-    for (Date date: movie.getDates("9:00")) {
-        time1.add(String.format("'%s'", dateFormat.format(date)));
+    for (String date: movie.getDates("9:00")) {
+        time1.add(String.format("'%s'", date));
     }
     List<String> time2 = new ArrayList<>();
-    for (Date date: movie.getDates("13:00")) {
-        time2.add(String.format("'%s'", dateFormat.format(date)));
+    for (String date: movie.getDates("13:00")) {
+        time2.add(String.format("'%s'", date));
     }
     List<String> time3 = new ArrayList<>();
-    for (Date date: movie.getDates("16:00")) {
-        time3.add(String.format("'%s'", dateFormat.format(date)));
+    for (String date: movie.getDates("16:00")) {
+        time3.add(String.format("'%s'", date));
     }
-
     List<MovieStruct> movies = movie.getMovies();
     movie.close();
 %>
@@ -149,8 +149,8 @@
                             <div class="collapse" id="showtime<%=i%>">
                                 <div class="card card-body text-bg-dark">
                                     <div class="row g-2 row-cols-1">
-                                        <% for(Date date : item.showdates){%>
-                                            <div class="col<%if(date.before(new Date())){%> text-decoration-line-through<%}%>"><%=dateFormat.format(date)%></div>
+                                        <% for(String date : item.showdates){%>
+                                            <div class="col<%if(Integer.parseInt(String.join("", date.split("-"))) < today){%> text-decoration-line-through<%}%>"><%=date%></div>
                                         <%}%>
                                     </div>
                                 </div>

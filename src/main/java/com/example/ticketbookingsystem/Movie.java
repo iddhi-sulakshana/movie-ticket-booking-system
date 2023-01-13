@@ -36,10 +36,14 @@ public class Movie extends Database{
         }
         collection.updateOne(eq("TMDBid", id), Updates.combine(Updates.set("showdates", array), Updates.set("showtime", showtime)));
     }
-    public int insertMovie(int id, List<Date> showdates, String showtime, double price) throws IOException {
+    public int insertMovie(int id, List<String> showdates, String showtime, double price) throws IOException {
         tmdbAPI api = new tmdbAPI();
         MovieStruct movie = api.getMovie(id);
-        movie.showdates = showdates;
+        movie.showdates = new ArrayList<>();
+        for(String date : showdates) {
+            movie.showdates.add(String.format("%s-%s-%s", date.split("-")[2], date.split("-")[0], date.split("-")[1]));
+        }
+        System.out.println(movie.showdates);
         movie.showtime = showtime;
         movie.price = price;
         if(isExist(movie.TMDBid) == 0){
@@ -54,12 +58,12 @@ public class Movie extends Database{
             return 0;
         return 1;
     }
-    public List<Date> getDates(String showtime) {
-        List<Date> showdates = new ArrayList<>();
+    public List<String> getDates(String showtime) {
+        List<String> showdates = new ArrayList<>();
         FindIterable<MovieStruct> movies = collection.find(eq("showtime", showtime));
         Iterator<MovieStruct> iterator = movies.iterator();
         while(iterator.hasNext()){
-            for(Date date : iterator.next().showdates){
+            for(String date : iterator.next().showdates){
                 if(!showdates.contains(date)){
                     showdates.add(date);
                 }
