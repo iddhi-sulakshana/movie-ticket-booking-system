@@ -25,7 +25,6 @@ public class loginServlet extends HttpServlet {
         String inEmail = request.getParameter("email");
         String inPassword = request.getParameter("password");
         UserStruct user = objUser.getUser(inEmail);
-        objUser.close();
 
         //check email
         if (user != null) {
@@ -54,14 +53,17 @@ public class loginServlet extends HttpServlet {
 
 
             } else {
+                objUser.close();
                 session.setAttribute("loginPasswordError", " ! Invalid Password");
                 response.sendRedirect("login.jsp");
             }
         }
         else {
+            objUser.close();
             session.setAttribute("loginEmailError", " ! Invalid email address");
             response.sendRedirect("login.jsp");
         }
+        objUser.close();
 
     }
 }

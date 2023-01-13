@@ -1,3 +1,12 @@
+<%@ page import="com.example.ticketbookingsystem.Movie" %>
+<%@ page import="com.example.ticketbookingsystem.Essentials" %>
+<%@ page import="com.example.ticketbookingsystem.MovieStruct" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="com.example.ticketbookingsystem.Ticket" %>
 <%@include file="./header.jsp" %>
     <title>ABC Movies</title>
     <link rel="stylesheet" href="./jquery/jquery-ui.css">
@@ -6,24 +15,46 @@
     <script defer src="./jquery/jquery-ui.min.js"></script>
     <script defer src="./js/selectSeat.js"></script>
 <%@include file="./nav.jsp" %>
+<%
+    Movie movieObj = new Movie();
+    Essentials es = new Essentials();
+    if(request.getParameter("movieId").trim() == null || !es.isInt(request.getParameter("movieId"))){
+        session.setAttribute("error", "Invalid request");
+        response.sendRedirect("./");
+        return;
+    }
+    MovieStruct movie = new MovieStruct();
+    movie.TMDBid = Integer.parseInt(request.getParameter("movieId"));
+    movie = movieObj.getMovie(movie.TMDBid);
+    movieObj.close();
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    List<String> time1 = new ArrayList<>();
+    for (Date date: movie.showdates) {
+        time1.add(String.format("'%s'", dateFormat.format(date)));
+    }
+    Ticket ticket = new Ticket();
+    ticket.getSeatsInMovie(movie.TMDBid, movie.showtime, movie.showdates.get(0));
+    ticket.close();
+%>
+<script>
+    // get available dates from the server and put it on the
+    // dates variable it feeds to get dates and only enable
+    // available dates in the datepicker
+    const availableDates = <%=time1%>
+</script>
 <!-- Section -->
     <div class="container rounded p-3 my-3">
         <div class="row g-5 row-cols-1">
             <div class="col p-3 text-center">
-                <h1>Black Adam</h1>
-                <form action="./checkout.html" id="checkout-form" novalidate>
-                    <input type="text" name="moviename" value="Black Adam" hidden>
+                <h1><%=movie.title%></h1>
+                <form action="./checkout.jsp" id="checkout-form" novalidate>
+                    <input type="text" name="movieId" value="<%=movie.TMDBid%>" hidden>
                 <div class="row my-3 px-5 g-4 align-items-center">
                     <div class="col-lg-6">
                         <input type="text" class="form-control moviedate" placeholder="Pick the Movie date" autocomplete="off" name="moviedate" required>
                     </div>
                     <div class="col-lg-6">
-                        <select name="" id="" class="form-select text-bg-dark movietime" required>
-                            <option selected value="">Select Movie Time</option>
-                            <option value="9:00">9:00</option>
-                            <option value="9:00">13:00</option>
-                            <option value="9:00">16:00</option>
-                        </select>
+                        <input type="text" class="form-control movietime" value="<%=movie.showtime%>" autocomplete="off" readonly name="movietime" required>
                     </div>
                 </div>
             </div>

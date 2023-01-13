@@ -41,7 +41,7 @@
                 <p><%=movie.description%></p>
             </div>
             <div class="col-lg-auto">
-                <button class="btn btn-lg w-100 btn-outline-success" onclick="document.location='./selectSeat.jsp'">Book Now</button>
+                <button class="btn btn-lg w-100 btn-outline-success" onclick="document.location='./selectSeat.jsp?movieId=<%=movie.TMDBid%>'">Book Now</button>
             </div>
         </div>
     </div>

@@ -3,17 +3,11 @@ const pricelabel = document.querySelector('.price')
 const seatnameinput = document.getElementById('seat-name')
 const priceinput = document.getElementById('price')
 const seatPrice = 200.00
-// get available dates from the server and put it on the
-// dates variable it feeds to get dates and only enable
-// available dates in the datepicker
-const availableDates = ["2023-01-20","2023-01-21","2023-01-22"]
-getDates(availableDates)
 
 const moviedate = document.querySelector('.moviedate');
 const movietime = document.querySelector('.movietime');
-
-moviedate.onchange = movietime.onchange = () => {
-    if(moviedate.value == '' || movietime.value == '')
+moviedate.onchange = () => {
+    if(moviedate.value == '')
         return
     initializeSeats(2)
 }
@@ -74,6 +68,7 @@ function clickSeat(e){
 function getSeatNumber(seat){
     return seat.closest('.seat-line').children[0].innerHTML + seat.querySelector('span').innerHTML
 }
+getDates(availableDates)
 function getDates(dates){
     $(document).ready( function () {
         $('.moviedate').datepicker({
@@ -93,8 +88,8 @@ document.getElementById('checkout-form').onsubmit = () => {
         window.location.replace('./')
         return false
     }
-    if(moviedate.value == '' || movietime.value == ''){
-        alert('Please select movie time')
+    if(moviedate.value == ''){
+        alert('Please select movie date')
         return false
     }
     if(seatnameinput.value == '' || priceinput.value == ''){

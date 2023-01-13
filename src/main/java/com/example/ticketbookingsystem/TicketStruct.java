@@ -1,5 +1,6 @@
 package com.example.ticketbookingsystem;
 
+import java.util.Date;
 import java.util.List;
 
 public class TicketStruct {
@@ -11,6 +12,6 @@ public class TicketStruct {
     public String       phone;
     public double       price;
     public String       transactionId;
-    public String       showDate;
+    public Date         showDate;
     public String       showTime;
 }
