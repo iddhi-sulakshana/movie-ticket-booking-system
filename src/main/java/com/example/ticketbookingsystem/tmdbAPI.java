@@ -81,19 +81,24 @@ public class tmdbAPI {
         MovieDetails movie = new MovieDetails();
 
         String tmdbmovieId = id;
-        String requestUrl2 = "https://api.themoviedb.org/3/movie/" + tmdbmovieId + "/credits?api_key=19f84e11932abbc79e6d83f82d6d1045";
-        String requestUrl3 = "https://api.themoviedb.org/3/movie/" + tmdbmovieId + "/reviews?api_key=19f84e11932abbc79e6d83f82d6d1045";
+
+        String requestUrl1 = "https://api.themoviedb.org/3/movie/" + tmdbmovieId + secret;
+        String requestUrl2 = "https://api.themoviedb.org/3/movie/" + tmdbmovieId + "/credits" + secret ;
+        String requestUrl3 = "https://api.themoviedb.org/3/movie/" + tmdbmovieId + "/reviews" + secret;
 
         String response = getResponse(requestUrl2);
         String response2 = getResponse(requestUrl3);
+        String response3 = getResponse(requestUrl1);
         if(response.contains("HTTPResponseCode:")) {
             throw new RuntimeException(response);
         }
 
         JsonParser parser = new JsonParser();
         JsonObject rootObj = parser.parse(response).getAsJsonObject();
-
         JsonObject rootObj2 = parser.parse(response2).getAsJsonObject();
+        JsonObject rootObj3 = parser.parse(response3).getAsJsonObject();
+
+        movie.imdbID = rootObj3.get("imdb_id").getAsString();
 
 
         JsonArray crew = rootObj.get("crew").getAsJsonArray();

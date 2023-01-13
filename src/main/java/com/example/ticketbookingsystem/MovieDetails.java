@@ -2,7 +2,7 @@ package com.example.ticketbookingsystem;
 
 public class MovieDetails extends MovieStruct{
 
-
+    public String imdbID;
     public String director;
 
     public String[] actorName;

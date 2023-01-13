@@ -96,7 +96,7 @@
     </div>
     <div class="row second-row">
         <div class="col-lg-3 col-sm-12 mt-sm-3 d-flex align-items-center order-4 cast-see-more">
-            <a href="https://www.imdb.com/title/${movie.imdbID}/fullcredits?ref_=tt_cl_sm" target="_blank">
+            <a href="https://www.imdb.com/title/<%=movie.imdbID%>/fullcredits?ref_=tt_cl_sm" target="_blank">
                 <button type="button" class="btn btn-link see-more-link" style="text-decoration: none !important;">
                     <h4 class="see-more" style="font-weight: 700; color: white;">SEE MORE
                         <span class="v-dash">></span>
@@ -155,7 +155,7 @@
                     <div class="review">
                         <span class="review-body"><%= movie.reviewBody %></span>
                         <span class="review-see-more">
-                                  <a href="https://www.imdb.com/title/${movie.imdbID}/reviews?ref_=tt_urv" target="_blank">
+                                  <a href="https://www.imdb.com/title/<%=movie.imdbID%>/reviews?ref_=tt_urv" target="_blank">
                                       <button type="button" class="btn btn-link see-more-link" style="text-decoration: none !important;">
                                       <h5 class="see-more" style="font-weight: 700; color: white; font-size:12px ">SEE MORE <span class="v-dash">></span></h5>
                                   </button>
