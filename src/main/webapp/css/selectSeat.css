@@ -131,3 +131,13 @@ body {
         width: 900px;
     }
 }
+
+
+.ui-state-highlight {
+    border: 0 !important;
+}
+
+.ui-state-highlight a {
+    background: var(--special-color) !important;
+    color: var(--primary-font-color) !important;
+}

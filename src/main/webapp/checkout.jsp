@@ -1,3 +1,15 @@
+<%
+    if(request.getParameter("movieId").trim() == "" ||
+        request.getParameter("moviedate").trim() == "" ||
+        request.getParameter("movietime").trim() == "" ||
+        request.getParameter("price").trim() == "" ||
+        request.getParameter("seats").trim() == ""
+    ){
+        session.setAttribute("error", "Invalid Request");
+        response.sendRedirect("./");
+        return;
+    }
+%>
 <%@include file="./header.jsp" %>
     <title>ABC Movies</title>
     <link rel="stylesheet" href="./css/checkout.css">
