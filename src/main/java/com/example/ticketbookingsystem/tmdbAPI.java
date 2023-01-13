@@ -74,4 +74,38 @@ public class tmdbAPI {
         scanner.close();
         return response;
     }
+
+    public MovieDetails getMovieDetails(String id) throws IOException {
+
+        MovieDetails movie = new MovieDetails();
+
+        String tmdbmovieId = id;
+        String requestUrl2 = "https://api.themoviedb.org/3/movie/" + tmdbmovieId + "/credits?api_key=19f84e11932abbc79e6d83f82d6d1045";
+
+        String response = getResponse(requestUrl2);
+        if(response.contains("HTTPResponseCode:")) {
+            throw new RuntimeException(response);
+        }
+
+        JsonParser parser = new JsonParser();
+        JsonObject rootObj = parser.parse(response).getAsJsonObject();
+
+
+        JsonArray crew = rootObj.get("crew").getAsJsonArray();
+        String director = "";
+        for (JsonElement element : crew) {
+            JsonObject obj = element.getAsJsonObject();
+            if (obj.get("job").getAsString().equals("Director")) {
+                director = obj.get("name").getAsString();
+                break;
+            }
+        }
+
+        movie.director = director;
+
+        return movie;
+
+
+    }
+
 }
