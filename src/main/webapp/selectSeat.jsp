@@ -27,13 +27,12 @@
     movie.TMDBid = Integer.parseInt(request.getParameter("movieId"));
     movie = movieObj.getMovie(movie.TMDBid);
     movieObj.close();
-    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     List<String> time1 = new ArrayList<>();
-    for (Date date: movie.showdates) {
-        time1.add(String.format("'%s'", dateFormat.format(date)));
+    for (String date: movie.showdates) {
+        time1.add(String.format("'%s'", date));
     }
     Ticket ticket = new Ticket();
-    ticket.getSeatsInMovie(movie.TMDBid, movie.showtime, movie.showdates.get(0));
+    ticket.getSeatsInMovie(movie.TMDBid, movie.showtime, time1.get(0));
     ticket.close();
 %>
 <script>

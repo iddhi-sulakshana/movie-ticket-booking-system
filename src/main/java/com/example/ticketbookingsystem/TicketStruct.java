@@ -12,6 +12,6 @@ public class TicketStruct {
     public String       phone;
     public double       price;
     public String       transactionId;
-    public Date         showDate;
+    public String       showDate;
     public String       showTime;
 }

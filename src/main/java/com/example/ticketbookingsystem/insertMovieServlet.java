@@ -36,10 +36,11 @@ public class insertMovieServlet extends HttpServlet {
             return;
         }
         Movie movie = new Movie();
-        List<Date> showdates = new ArrayList<>();
+        List<String> showdates = new ArrayList<>();
         for (String date : request.getParameter("showdates").split(", ")){
-            showdates.add(new Date(date));
+            showdates.add(String.join("-", date.split("/")));
         }
+
         int success = movie.insertMovie(id, showdates, request.getParameter("timeslot"), Double.parseDouble(request.getParameter("price")));
         movie.close();
         if(success == 1) {
