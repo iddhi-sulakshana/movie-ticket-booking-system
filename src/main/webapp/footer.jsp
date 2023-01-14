@@ -36,17 +36,17 @@
                     <h4 class="text-md-right">Give us Feedback</h4>
                     <hr>
 
-                    <form method="post" action="">
+                    <form method="post" name="feedbackForm">
                         <fieldset class="form-group">
-                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" required>
+                            <input name="email" id="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" required>
                         </fieldset>
                         <br>
                         <fieldset class="form-group">
-                            <textarea name="feedback" class="form-control" id="exampleMessage" placeholder="Your Feedback" required></textarea>
+                            <textarea name="feedback" id="feedback" class="form-control" id="exampleMessage" placeholder="Your Feedback" required></textarea>
                         </fieldset>
                         <br>
                         <fieldset class="form-group text-xs-right">
-                            <input style="color: #adff2f; border: none; background-color: transparent;" type="submit" value="Send">
+                            <input style="color: #adff2f; border: none; background-color: transparent;" type="submit" value="Send" onclick="sendMail()">
                         </fieldset>
 <%--                        <input type="hidden" name="_template" value="box">--%>
 <%--                        <input type="hidden" name="_subject" value="Feedback From a User">--%>

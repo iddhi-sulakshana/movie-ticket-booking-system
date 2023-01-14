@@ -19,3 +19,13 @@
     <script defer src="./bootstrap/js/bootstrap.js"></script>
     <script src="./js/gsap.min.js"></script>
     <script defer src="./js/main.js"></script>
+    <script src="js/feedback.js"></script>
+    <!-- Email Service Scripts -->
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init("98K5qcw7Se_9wuuAX");
+        })();
+    </script>
