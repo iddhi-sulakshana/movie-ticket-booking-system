@@ -11,14 +11,7 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "loginServlet", value = "/loginServlet")
 public class loginServlet extends HttpServlet {
-
     User objUser = new User();
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
@@ -30,20 +23,22 @@ public class loginServlet extends HttpServlet {
         if (user != null) {
             //check password
             if (user.password.equals(inPassword)) {
-
                 switch (user.role) {
                     case "admin":
+                        objUser.close();
                         //admin account
                         session.setAttribute("logRole", "admin");
                         response.sendRedirect("mDashboard.jsp");
                         break;
                     case "frontdesk":
+                        objUser.close();
                         //frontdest account
                         session.setAttribute("logRole", "frontdesk");
                         response.sendRedirect("uDashboard.jsp");
 
                         break;
                     default:
+                        objUser.close();
                         //user account
                         session.setAttribute("logRole", "user");
                         response.sendRedirect("uDashboard.jsp");

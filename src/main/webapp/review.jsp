@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Chamo
   Date: 1/13/2023
@@ -46,7 +46,7 @@
                             <h6 class="text-muted">${order.movieName}</h6>
                             <span class="text-muted movie-theater-">ABC Cinema: LUXE HALL</span>
                             <div class="mt-4">
-                                <h6 class="text-muted movie-screen-seats">B2, B3 - ${order.totalSeats} Ticket(s)</h6>
+                                <h6 class="text-muted movie-screen-seats">${seats} - ${order.totalSeats} Ticket(s)</h6>
 
                                 <h6 class="text-muted movie-date">${order.movieDate}</h6>
                                 <h6 class="text-muted movie-date">${order.movieTime}</h6>

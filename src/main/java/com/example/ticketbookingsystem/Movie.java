@@ -52,7 +52,9 @@ public class Movie extends Database{
         System.out.println(movie.showdates);
         movie.showtime = showtime;
         movie.price = price;
-        if(isExist(movie.TMDBid) == 0){
+        MovieStruct movie1 = collection.find(Filters.and(Filters.lt("showdates", format.format(new Date())), eq("TMDBid", id))).first();
+
+        if(isExist(movie.TMDBid) == 0 || movie1 != null){
             collection.insertOne(movie);
             return 0;
         }
