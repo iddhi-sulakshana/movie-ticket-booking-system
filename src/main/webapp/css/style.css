@@ -133,10 +133,53 @@
         bottom: 0;
     }
 
+/*footer*/
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 300px;
+}
+
+/* Taller footer on small screens */
+@media (max-width: 34em) {
+    body {
+        margin-bottom: 500px;
+    }
+    .footer {
+        height: 500px;
+    }
+}
+
+/* Sticky footer style and color
+-------------------------------------------------- */
+footer {
+    padding-top: 30px;
+    background-color: var(--sec-background-color);
+    color: #bbb;
+}
+.footerCover
+{
+    padding-top: 300px;
+}
+
+footer .form-control {
+    background-color: #292c2f;
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    border: none;
+    resize: none;
+    color: #d1d2d2;
+    padding: 0.7em 1em;
+}
 /* Break Points */
     /* `xs` returns only a ruleset and no media query */
     /* `sm` applies to x-small devices (portrait phones, less than 576px) */
     @media (max-width: 575.98px) {
+        .footerCover
+        {
+            padding-top: 500px;
+        }
     }
 
     /* `md` applies to small devices (landscape phones, less than 768px) */

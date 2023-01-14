@@ -49,9 +49,6 @@ for(let i = 0; i < menuitems.length; i++){
     }
 }
 
-var time1array = ["2023-01-14","2023-01-15","2023-01-16"]
-var time2array = ["2023-01-17","2023-01-18","2023-01-19"]
-var time3array = ["2023-01-20","2023-01-21","2023-02-22"]
 var arrayofdates = []
 document.getElementById('time1').onclick = (e) => {
     arrayofdates = time1array
@@ -63,7 +60,7 @@ document.getElementById('time3').onclick = (e) => {
     arrayofdates = time3array
 }
 $(document).ready( function () {
-    $('.showdates').multiDatesPicker({
+    $('#showdates').multiDatesPicker({
         minDate: 1,
         beforeShowDay: function(date){
             var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
@@ -71,7 +68,15 @@ $(document).ready( function () {
         }
     })
 })
-
+document.getElementsByName("timeslot").forEach((e) => {
+    e.addEventListener('click', clickTime);
+})
+function clickTime(e){
+    document.getElementById("showdates").removeAttribute("hidden");
+    document.getElementsByName("timeslot").forEach((e) => {
+        e.removeEventListener('click', clickTime)
+    })
+}
 const inputs = document.querySelectorAll('.form-outline input')
 const edit = document.getElementById('editAcc')
 const save = document.getElementById('saveAcc')
@@ -80,14 +85,49 @@ edit.addEventListener('click', () => {
     removeDisable(save)
     addDisable(edit)
 })
-save.addEventListener('click', () => {
-    inputs.forEach(addDisable)
-    addDisable(save)
-    removeDisable(edit)
-})
 function removeDisable(input){
     input.removeAttribute('disabled')
 }
 function addDisable(input){
     input.setAttribute('disabled', '');
 }
+const searchbtn = document.getElementById('searchmovie');
+const searchname = document.getElementById('searchname');
+const searchgenres = document.getElementById('searchgenres');
+const searchoverview = document.getElementById('searchoverview');
+const posterlink = document.getElementById('poster');
+const bannerlink = document.getElementById('banner');
+const searchsection = document.getElementById('searchsection');
+const moviename = document.getElementById('moviename');
+function clearvalues() {
+    searchsection.style.display = "none";
+    searchname.value = searchgenres.value = searchoverview.value = "N/A"
+    posterlink.removeAttribute('href');
+    bannerlink.removeAttribute('href');
+}
+searchbtn.onclick = () => {
+    if(searchbtn.classList.contains('loading')){
+        return false;
+    }
+    if(moviename.value.trim() == '') {
+        return false;
+    }
+    searchbtn.classList.add('loading');
+    clearvalues()
+    $.post("./getMovieDetailsServlet", {moviename: moviename.value}, function(data) {
+        if(data == '-1') {
+            alert("No matching movie found");
+            searchbtn.classList.remove('loading')
+            return;
+        }
+        const obj = JSON.parse(data);
+        searchname.value = obj.title;
+        searchgenres.value = obj.genres.join(", ");
+        searchoverview.value = obj.description;
+        posterlink.setAttribute('href', "https://image.tmdb.org/t/p/original" + obj.poster);
+        bannerlink.setAttribute('href', "https://image.tmdb.org/t/p/original" + obj.banner);
+        searchbtn.classList.remove('loading')
+        searchsection.style.display = "block";
+    });
+}
+clearvalues()

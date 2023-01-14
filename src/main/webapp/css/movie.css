@@ -1,48 +1,45 @@
-.cover {
-    width: 100%;
-    height: 75vh;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    position: relative;
+
+#movie img {
+    height: 450px;
+    width: 300px;
 }
-.cover .details {
-    position: absolute;
-    bottom: 0;
+
+.movietitle{
+    font-weight: 700;
 }
-.cover .details h1 {
+.v-dash {
+    color: #f5c518;
+}
+
+.actor-image{
+    height: 190px;
+    width: 160px;
+}
+
+.actor-name{
+    font-weight: bold;
+}
+
+.cast-title{
     font-weight: 700;
 }
 
-.cover .details span i{
-    color: var(--special-color)
+.see-more h4{
+    font-weight: 700;
+    color: yellow;
 }
 
-.tags .tag {
-    background-color: var(--sec-background-color);
+.see-more-h5 {
+    font-weight: 700;
+    /*color: black;*/
+    font-size: 12px;
 }
 
-.play-btn {
-    position: absolute;
-    z-index: 1000;
-    right: 0.5rem;
-    top: 0.5rem;
-}
-.video-wrapper {
-    z-index: 900;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    display: none;
-}
-.video-wrapper iframe {
-    width: 100%;
-    height: 100%;
+.see-more-link {
+    text-decoration: none !important;
 }
 
-.container {
-    background-color: var(--sec-background-color);
+
+.review-star {
+    color: #f5c518;
 }

@@ -107,7 +107,7 @@ body{
     font-size: 1.5rem;
 }
 .hidden-div {
-    background-color: red;
+    background-color: transparent;
     height: 10vh;
 }
 
@@ -115,7 +115,11 @@ body{
     border: 0 !important;
   }
 
-  .ui-state-highlight a {
-    background: var(--special-color) !important;
-    color: var(--primary-font-color) !important;
-  }
+.ui-state-highlight a {
+background: var(--special-color) !important;
+color: var(--primary-font-color) !important;
+}
+#searchmovie.loading {
+    cursor: progress !important;
+    background-color: transparent !important;
+}

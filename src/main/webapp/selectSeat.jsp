@@ -1,3 +1,8 @@
+<%@ page import="com.example.ticketbookingsystem.Movie" %>
+<%@ page import="com.example.ticketbookingsystem.Essentials" %>
+<%@ page import="com.example.ticketbookingsystem.MovieStruct" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%@include file="./header.jsp" %>
     <title>ABC Movies</title>
     <link rel="stylesheet" href="./jquery/jquery-ui.css">
@@ -6,29 +11,53 @@
     <script defer src="./jquery/jquery-ui.min.js"></script>
     <script defer src="./js/selectSeat.js"></script>
 <%@include file="./nav.jsp" %>
+<%
+    String role = (String) session.getAttribute("logRole");
+    if(role == "admin"){
+        session.setAttribute("error", "Invalid page");
+        response.sendRedirect("./mDashboard.jsp");
+        return;
+    }
+    Movie movieObj = new Movie();
+    Essentials es = new Essentials();
+    if(request.getParameter("movieId").trim() == null || !es.isInt(request.getParameter("movieId"))){
+        session.setAttribute("error", "Invalid request");
+        response.sendRedirect("./");
+        return;
+    }
+    MovieStruct movie = new MovieStruct();
+    movie.TMDBid = Integer.parseInt(request.getParameter("movieId"));
+    movie = movieObj.getMovie(movie.TMDBid);
+    movieObj.close();
+    List<String> time1 = new ArrayList<>();
+    for (String date: movie.showdates) {
+        time1.add(String.format("'%s'", date));
+    }
+%>
+<script>
+    // get available dates from the server and put it on the
+    // dates variable it feeds to get dates and only enable
+    // available dates in the datepicker
+    const availableDates = <%=time1%>
+</script>
 <!-- Section -->
     <div class="container rounded p-3 my-3">
-        <div class="row g-5 row-cols-1">
-            <div class="col p-3 text-center">
-                <h1>Black Adam</h1>
-                <form action="./checkout.html" id="checkout-form" novalidate>
-                    <input type="text" name="moviename" value="Black Adam" hidden>
+        <div class="row g-3 row-cols-1">
+            <div class="col text-center">
+                <h1><%=movie.title%></h1>
+                <form action="./checkout.jsp" method="get" id="checkout-form" novalidate>
+                    <input type="text" name="movieId" value="<%=movie.TMDBid%>" hidden readonly>
                 <div class="row my-3 px-5 g-4 align-items-center">
                     <div class="col-lg-6">
                         <input type="text" class="form-control moviedate" placeholder="Pick the Movie date" autocomplete="off" name="moviedate" required>
                     </div>
                     <div class="col-lg-6">
-                        <select name="" id="" class="form-select text-bg-dark movietime" required>
-                            <option selected value="">Select Movie Time</option>
-                            <option value="9:00">9:00</option>
-                            <option value="9:00">13:00</option>
-                            <option value="9:00">16:00</option>
-                        </select>
+                        <input type="text" class="form-control movietime" value="<%=movie.showtime%>" autocomplete="off" readonly name="movietime" required>
                     </div>
                 </div>
             </div>
             <div class="col d-flex flex-column align-items-center justify-content-center">
-                <h3 class="title my-3">Screen</h3>
+                <h3 class="title my-2">Screen</h3>
                 <img src="./assets/primary-images/screen.png" class="w-100" alt="">
             </div>
             <div class="col d-flex flex-column align-items-center justify-content-center">
@@ -266,6 +295,20 @@
                     </ul>
                 </div>
             </div>
+            <div class="col d-flex flex-row gap-4 align-items-center justify-content-center">
+                <div class="d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="seat booked"><div><span></span></div></div>
+                    Booked
+                </div>
+                <div class="d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="seat free"><div><span></span></div></div>
+                    Available
+                </div>
+                <div class="d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="seat selected"><div><span></span></div></div>
+                    Selected
+                </div>
+            </div>
             <div class="col d-flex flex-column align-items-center justify-content-center">
                 <div class="container row row-cols-1 row-cols-lg-3 align-items-center text-center g-3 py-2 px-3">
                     <div class="col">
@@ -274,7 +317,7 @@
                     </div>
                     <div class="col">
                         <div class="checkout-title">Total Price</div>
-                        <div class="checkout-sub price">$150.00</div>
+                        <div class="checkout-sub price">150.00</div>
                     </div>
                     <div class="col">
                             <input type="text" name="seats" id="seat-name" hidden>

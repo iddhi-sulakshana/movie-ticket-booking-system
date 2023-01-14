@@ -8,4 +8,5 @@ public class UserStruct {
     public String   password;
     public String   phone;
     public String   fullName;
+    public String role;
 }
