@@ -1,9 +1,33 @@
+.cover {
+    width: 100%;
+    height: 75vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+}
+.cover .details {
+    position: absolute;
+    bottom: 0;
+}
+.cover .details h1 {
+    font-weight: 700;
+}
 
+.cover .details span i{
+    color: var(--special-color)
+}
+
+.tags .tag {
+    background-color: var(--sec-background-color);
+}
 #movie img {
     height: 450px;
     width: 300px;
 }
-
+.shadow {
+    text-shadow: 3px 3px 4px black;
+}
 .movietitle{
     font-weight: 700;
 }

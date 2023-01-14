@@ -16,40 +16,30 @@
     MovieStruct ms = new MovieStruct();
     ms.TMDBid = Integer.parseInt(request.getParameter("movieId"));
     ms = movieObj.getMovie(ms.TMDBid);
+    if(ms == null){
+        session.setAttribute("error", "Invalid request");
+        response.sendRedirect("./");
+        return;
+    }
     movieObj.close();
     tmdbAPI api = new tmdbAPI();
     MovieDetails movie = api.getMovieDetails(movieId);
 %>
-<div class="container mt-5 mb-5">
-
-    <div class="row align-items-center mb-5">
-        <div class="col-lg-4 col-sm-12 movie-poster d-flex justify-content-start">
-            <div id="movie" class="">
-                <img src="https://image.tmdb.org/t/p/original<%= ms.poster %>" alt="movie poster" />
-            </div>
-        </div>
-        <div class="col-lg-6 col-sm-10 mt-3 movie-title movie-details d-flex flex-column ">
-            <h2 class="movietitle mb-4"><%= ms.title %></h2>
-            <span class="movie-plot-title mb-2" style="color: white">Overview:</span>
-            <span class="movie-plot-body mb-3" style="color: white"><%= ms.description %></span>
-            <span class="movie-director mb-3" style="color: white">Director:<span class="movie-director-name ms-1 mb-3"><%=movie.director%></span></span>
-            <span class="movie-genre-title mb-3" style="color: white">Genres:
-              <%
-                  String[] genres = ms.genres.toArray(new String[0]);
-                  for (int i = 0; i < genres.length; i++) {
-              %>
-              <span class=" ms-1"><%= genres[i] %></span>
-              <% } %>
-              </span>
-            <span class="movie-genre mb-3"></span>
-            <a class="btn btn-primary col-3" href="./selectSeat.jsp?movieId=<%=ms.TMDBid%>" role="button">Buy Tickets</a>
-        </div>
+<div class="container rounded cover my-2" style="background-image: url('https://image.tmdb.org/t/p/original<%=ms.banner%>');">
+    <div class="details p-4 w-md-25">
+        <h1 class="shadow"><%= ms.title %></h1><br>
+        <div class="tags d-flex gap-3">
+            <%for(String genre : ms.genres){%>
+                <div class="tag p-1 rounded"><%=genre%></div>
+            <%}%>
+        </div><br>
+        <span class="movie-plot-title shadow mb-2" style="color: white">Overview:</span><br>
+        <span class="movie-plot-body shadow mb-3" style="color: white"><%= ms.description %></span><br>
+        <span class="movie-director shadow mb-3" style="color: white">Director:<span class="movie-director-name ms-1 mb-3"><%=movie.director%></span></span><br>
+        <button class="btn btn-outline-primary" onclick="location.href='./selectSeat.jsp?movieId=<%=ms.TMDBid%>'">Book Ticket</button>
     </div>
-
-
-
-
-
+</div>
+<div class="container p-5 mb-5">
 
     <%-- TOP CAST SECTION--%>
 
