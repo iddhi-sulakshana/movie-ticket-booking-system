@@ -6,27 +6,38 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "authorize_payment", value = "/authorize_payment")
 public class AuthorizePaymentServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getParameter("TMDBid") == null || request.getParameter("fname") == null ||
+                request.getParameter("lname") == null || request.getParameter("email") == null ||
+                request.getParameter("phone") == null || request.getParameter("total") == null ||
+                request.getParameter("title") == null || request.getParameter("totalSeats") == null ||
+                request.getParameter("seats") == null || request.getParameter("moviedate") == null ||
+                request.getParameter("movietime") == null)
+        {
+            HttpSession session = request.getSession();
+            session.setAttribute("error", "Invalid request");
+            response.sendRedirect("./");
+            return;
+        }
 
         String movieID = request.getParameter("TMDBid");
         String firstName = request.getParameter("fname");
         String lastName = request.getParameter("lname");
         String email = request.getParameter("email");
         String userPhoneNumber = request.getParameter("phone");
-        String total = "8";
-//       String total = request.getParameter("total");
+        String total = request.getParameter("total");
         String movieName = request.getParameter("title");
         String totalSeats = request.getParameter("totalSeats");
-        String seats = request.getParameter("seats");
+        List<String> seats = new ArrayList<>();
+        for (String seat : request.getParameter("seats").split(",")){
+            seats.add(seat);
+        }
         String movieDate = request.getParameter("moviedate");
         String movieTime = request.getParameter("movietime");
 
@@ -41,7 +52,6 @@ public class AuthorizePaymentServlet extends HttpServlet {
             String approvalLink = paymentServices.authorizePayment(orderDetails);
 
             response.sendRedirect(approvalLink);
-            System.out.println("Approval LINK: " + approvalLink);
 
 
 

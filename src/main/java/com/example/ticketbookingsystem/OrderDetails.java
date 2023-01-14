@@ -1,5 +1,7 @@
 package com.example.ticketbookingsystem;
 
+import java.util.List;
+
 public class OrderDetails {
 
     private String movieID;
@@ -16,7 +18,7 @@ public class OrderDetails {
 
     private String totalSeats;
 
-    private String seats;
+    private List<String> seats;
 
     private String total;
 
@@ -25,7 +27,7 @@ public class OrderDetails {
     private String movieTime;
 
     public OrderDetails(String customerFirstName, String customerLastName, String customerEmail, String customerPhoneNumber,
-                       String movieName,String totalSeats, String seats,String total, String movieID, String movieTime, String movieDate ) {
+                       String movieName,String totalSeats, List<String> seats,String total, String movieID, String movieTime, String movieDate ) {
 
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
@@ -69,7 +71,18 @@ public class OrderDetails {
         return total;
     }
 
+    public String getMovieID() {
+        return movieID;
+    }
 
+    public List<String> getSeats() {
+        return seats;
+    }
+    public String getMovieTime(){
+        return movieTime;
+    }
 
-
+    public String getMovieDate() {
+        return movieDate;
+    }
 }
