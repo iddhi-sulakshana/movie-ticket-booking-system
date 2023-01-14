@@ -65,7 +65,6 @@ public class PaymentServices {
         Transaction transaction = new Transaction();
         transaction.setAmount(amount);
         transaction.setDescription(orderDetails.getMovieName());
-
         ItemList itemList = new ItemList();
         List<Item> items = new ArrayList<>();
 
