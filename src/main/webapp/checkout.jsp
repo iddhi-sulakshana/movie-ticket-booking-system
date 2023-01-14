@@ -56,6 +56,8 @@
                         <input type="text" name="seats" readonly hidden value="<%=seats%>">
                         <input type="text" name="title" readonly hidden value="<%=title%>">
                         <input type="tex" name="total" readonly hidden value="<%=price%>">
+                        <input type="tex" name="totalSeats" readonly hidden value="<%=seats.split(",").length%>">
+
                         <div class="row p-2 align-items-center justify-content-center">
                             <div class="col col-12 col-lg-6">
                                 <div class="form-floating mb-3">

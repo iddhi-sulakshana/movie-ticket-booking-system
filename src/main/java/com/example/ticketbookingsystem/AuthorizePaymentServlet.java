@@ -25,7 +25,7 @@ public class AuthorizePaymentServlet extends HttpServlet {
         String total = "8";
 //       String total = request.getParameter("total");
         String movieName = request.getParameter("title");
-        String totalSeats = "1"; // Edit total seats count into here
+        String totalSeats = request.getParameter("totalSeats");
         String seats = request.getParameter("seats");
         String movieDate = request.getParameter("moviedate");
         String movieTime = request.getParameter("movietime");
