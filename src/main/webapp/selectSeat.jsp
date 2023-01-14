@@ -39,13 +39,14 @@
     // dates variable it feeds to get dates and only enable
     // available dates in the datepicker
     const availableDates = <%=time1%>
+    const seatPrice = <%=movie.price%>
 </script>
 <!-- Section -->
     <div class="container rounded p-3 my-3">
         <div class="row g-3 row-cols-1">
             <div class="col text-center">
                 <h1><%=movie.title%></h1>
-                <form action="./checkout.jsp" method="get" id="checkout-form" novalidate>
+                <form action="./checkout.jsp" method="post" id="checkout-form" novalidate>
                     <input type="text" name="movieId" value="<%=movie.TMDBid%>" hidden readonly>
                 <div class="row my-3 px-5 g-4 align-items-center">
                     <div class="col-lg-6">

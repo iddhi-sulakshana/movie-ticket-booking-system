@@ -69,8 +69,8 @@ public class PaymentServices {
         ItemList itemList = new ItemList();
         List<Item> items = new ArrayList<>();
 
-        int pricePerTicket = Integer.parseInt(orderDetails.getTotal()) / Integer.parseInt(orderDetails.getTotalSeats());
-        String price = Integer.toString(pricePerTicket);
+        double pricePerTicket = Double.parseDouble(orderDetails.getTotal()) / Double.parseDouble(orderDetails.getTotalSeats());
+        String price = Double.toString(pricePerTicket);
 
         Item item = new Item();
         item.setCurrency("USD");

@@ -2,13 +2,17 @@ package com.example.ticketbookingsystem;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.Updates;
 import org.bson.BsonArray;
 import org.bson.BsonString;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,10 +20,10 @@ import static com.mongodb.client.model.Aggregates.set;
 import static com.mongodb.client.model.Filters.eq;
 
 public class Movie extends Database{
+    DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     private MongoCollection<MovieStruct> collection = database.getCollection("movies", MovieStruct.class);
     public MovieStruct getMovie(int id) {
-
-        return collection.find(eq("TMDBid", id)).first();
+        return collection.find(Filters.and(eq("TMDBid", id), Filters.gte("showdates", format.format(new Date())))).first();
     }
     public MovieStruct searchMovie(String title) {
         return collection.find(eq("title", title)).first();
@@ -74,7 +78,7 @@ public class Movie extends Database{
         return showdates;
     }
     public List<MovieStruct> getMovies(){
-        FindIterable<MovieStruct> results = collection.find();
+        FindIterable<MovieStruct> results = collection.find(Filters.gte("showdates", format.format(new Date())));
         List<MovieStruct> movies = new ArrayList<>();
         Iterator<MovieStruct> iterator = results.iterator();
         while (iterator.hasNext()){

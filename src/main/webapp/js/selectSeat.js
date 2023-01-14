@@ -3,7 +3,6 @@ const movieIDinput = document.querySelector('input[name="movieId"');
 const pricelabel = document.querySelector('.price')
 const seatnameinput = document.getElementById('seat-name')
 const priceinput = document.getElementById('price')
-const seatPrice = 200.00
 
 const moviedate = document.querySelector('.moviedate');
 const movietime = document.querySelector('.movietime');
