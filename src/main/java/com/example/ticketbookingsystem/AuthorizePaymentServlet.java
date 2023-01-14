@@ -17,19 +17,24 @@ public class AuthorizePaymentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String firstName = request.getParameter("firstname");
-        String lastName = request.getParameter("lastname");
+        String movieID = request.getParameter("TMDBid");
+        String firstName = request.getParameter("fname");
+        String lastName = request.getParameter("lname");
         String email = request.getParameter("email");
-        String userPhoneNumber = request.getParameter("userphone");
-        String total =request.getParameter("total");
-        String movieName = request.getParameter("movieName");
-        String totalTickets = request.getParameter("tickets");
+        String userPhoneNumber = request.getParameter("phone");
+        String total = "8";
+//       String total = request.getParameter("total");
+        String movieName = request.getParameter("title");
+        String totalSeats = "1"; // Edit total seats count into here
+        String seats = request.getParameter("seats");
+        String movieDate = request.getParameter("moviedate");
+        String movieTime = request.getParameter("movietime");
 
-        OrderDetails orderDetails = new OrderDetails(firstName, lastName, email, userPhoneNumber, movieName, totalTickets, total);
+        OrderDetails orderDetails = new OrderDetails(firstName, lastName, email, userPhoneNumber, movieName, totalSeats,
+                seats, total, movieID, movieTime, movieDate);
 
         HttpSession session = request.getSession();
         session.setAttribute("order", orderDetails);
-
 
         try {
             PaymentServices paymentServices = new PaymentServices();

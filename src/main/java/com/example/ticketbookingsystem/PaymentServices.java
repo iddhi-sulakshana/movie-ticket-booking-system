@@ -50,7 +50,7 @@ public class PaymentServices {
 
     private RedirectUrls getRedirectURLs() {
         RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setCancelUrl("http://localhost:8080/PaypalTest/cancel.html");
+        redirectUrls.setCancelUrl("http://localhost:8080/TicketBookingSystem_war_exploded/cancel.jsp");
         redirectUrls.setReturnUrl("http://localhost:8080/TicketBookingSystem_war_exploded/review_payment");
 
         return redirectUrls;
@@ -69,14 +69,14 @@ public class PaymentServices {
         ItemList itemList = new ItemList();
         List<Item> items = new ArrayList<>();
 
-        int pricePerTicket = Integer.parseInt(orderDetails.getTotal()) / Integer.parseInt(orderDetails.getTotalTickets());
+        int pricePerTicket = Integer.parseInt(orderDetails.getTotal()) / Integer.parseInt(orderDetails.getTotalSeats());
         String price = Integer.toString(pricePerTicket);
 
         Item item = new Item();
         item.setCurrency("USD");
         item.setName(orderDetails.getMovieName());
         item.setPrice(price);
-        item.setQuantity(orderDetails.getTotalTickets());
+        item.setQuantity(orderDetails.getTotalSeats());
 
 
         items.add(item);

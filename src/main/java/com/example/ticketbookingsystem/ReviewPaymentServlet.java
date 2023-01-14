@@ -19,22 +19,17 @@ public class ReviewPaymentServlet extends HttpServlet {
         String paymentId = request.getParameter("paymentId");
         String payerId = request.getParameter("PayerID");
 
-        System.out.println("REVIEW PAYMENT doGet()");
 
         try {
             PaymentServices paymentServices = new PaymentServices();
             Payment payment = paymentServices.getPaymentDetails(paymentId);
 
-            System.out.println("Payment Details in Review Payment: " + payment);
-
             HttpSession session = request.getSession();
             OrderDetails orderDetail = (OrderDetails) session.getAttribute("order");
-
 
             PayerInfo payerInfo = payment.getPayer().getPayerInfo();
             Transaction transaction = payment.getTransactions().get(0);
             ShippingAddress shippingAddress = transaction.getItemList().getShippingAddress();
-
 
             request.setAttribute("payer", payerInfo);
             request.setAttribute("transaction", transaction);
@@ -44,9 +39,6 @@ public class ReviewPaymentServlet extends HttpServlet {
             String url = "review.jsp?paymentId=" + paymentId + "&PayerID=" + payerId;
 
             request.getRequestDispatcher(url).forward(request, response);
-
-
-            session.invalidate();
 
 
         } catch (PayPalRESTException ex) {

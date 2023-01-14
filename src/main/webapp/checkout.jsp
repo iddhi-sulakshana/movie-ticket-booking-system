@@ -49,12 +49,13 @@
         <div class="row my-2">
             <div class="col-12 col-lg-8 p-2">
                 <div class="display p-2 rounded">
-                    <form action="" method="get">
+                    <form action="authorize_payment" method="post">
                         <input type="text" name="TMDBid" readonly hidden value="<%=movieID%>">
                         <input type="text" name="moviedate" readonly hidden value="<%=movieDate%>">
                         <input type="text" name="movietime" readonly hidden value="<%=movieTime%>">
                         <input type="text" name="seats" readonly hidden value="<%=seats%>">
                         <input type="text" name="title" readonly hidden value="<%=title%>">
+                        <input type="tex" name="total" readonly hidden value="<%=price%>">
                         <div class="row p-2 align-items-center justify-content-center">
                             <div class="col col-12 col-lg-6">
                                 <div class="form-floating mb-3">
