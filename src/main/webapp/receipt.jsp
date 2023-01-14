@@ -12,5 +12,28 @@
 </head>
 <body>
 
+<div class="container" style="margin-top: 200px;">
+    <div class="row align-items-center mb-5">
+        <div class="col-lg-12 d-flex justify-content-center">
+            <img src="/assets/primary-images/icon.png">
+            <h1>Thank you for your payment.</h1>
+        </div>
+        <div class="col-lg-12 d-flex justify-content-center mt-5 mb-5">
+
+            <span class="text-muted me-2">Payment ID:</span>
+            <span class="text-muted ms-1">${paymentID}</span>
+
+        </div>
+
+        <div class="col-lg-12 d-flex justify-content-center">
+
+            <a class="btn btn-primary" href="index.jsp" role="button">Home</a>
+        </div>
+
+    </div>
+
+</div>
+
+
 </body>
 </html>
