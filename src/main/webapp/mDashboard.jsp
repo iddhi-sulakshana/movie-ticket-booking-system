@@ -204,7 +204,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <label for="showdates" class="form-label">Movie Dates</label>
-                                <input type="text" id="showdates" class="form-control" hidden placeholder="Pick the Movie dates" autocomplete="off" name="showdates" required>
+                                <input type="text" id="showdates" class="form-control" readonly hidden placeholder="Pick the Movie dates" autocomplete="off" name="showdates" required>
                             </div>
                             <div class="col-lg-6">
                                 <label for="price" class="form-label">Ticket Price</label>

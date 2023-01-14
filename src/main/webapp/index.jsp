@@ -25,12 +25,12 @@
     <div id="hero" class="p-lg-5 p-0" style="background-image: url('https://image.tmdb.org/t/p/original<%=popular.banner%>');">
         <div class="container h-100 d-flex align-items-center">
             <div class="cover">
-                <h1 class="display-1 cover-header"><%=popular.title%></h1>
-                <p class="w-lg-50 cover-description">
+                <h1 class="animate-text display-1 cover-header"><%=popular.title%></h1>
+                <p class="animate-text w-lg-50 cover-description">
                     <%=popular.description%>
                 </p>
-                <button class="btn btn-lg btn-primary" onclick="document.location='./selectSeat.jsp?movieId=<%=popular.TMDBid%>'">Book now</button>
-                <button class="btn btn-lg btn-success mx-2" onclick="document.location='./movie.jsp?movieId=<%=popular.TMDBid%>'">More...</button>
+                <button class="animate-text btn btn-lg btn-primary" onclick="document.location='./selectSeat.jsp?movieId=<%=popular.TMDBid%>'">Book now</button>
+                <button class="animate-text btn btn-lg btn-success mx-2" onclick="document.location='./movie.jsp?movieId=<%=popular.TMDBid%>'">More...</button>
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
                 continue;
             }%>
             <div class="col">
-                <div class="card text-bg-dark rounded-4">
+                <div class="animate-card card text-bg-dark rounded-4">
                     <img src="https://image.tmdb.org/t/p/original<%=movie.poster%>" alt="card-img">
                     <div class="card-img-overlay d-flex flex-column align-items-center justify-content-around">
                         <h5 class="card-title"><%=movie.title%></h5>
@@ -84,7 +84,7 @@
                     continue;
                 }%>
             <div class="col">
-                <div class="card text-bg-dark rounded-4">
+                <div class="animate-card card text-bg-dark rounded-4">
                     <img src="https://image.tmdb.org/t/p/original<%=movie.poster%>" alt="card-img">
                     <div class="card-img-overlay d-flex flex-column align-items-center justify-content-around">
                         <h5 class="card-title"><%=movie.title%></h5>

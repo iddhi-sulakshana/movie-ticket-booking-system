@@ -11,14 +11,9 @@
     bottom: 0;
 }
 .cover .details h1 {
-    font-size: 5rem;
     font-weight: 700;
-    text-shadow: 3px 3px 4px black;
 }
-.cover .details h3 {
-    text-shadow: 3px 3px 4px black;
-    font-size: 3rem;
-}
+
 .cover .details span i{
     color: var(--special-color)
 }
@@ -26,7 +21,49 @@
 .tags .tag {
     background-color: var(--sec-background-color);
 }
+#movie img {
+    height: 450px;
+    width: 300px;
+}
+.shadow {
+    text-shadow: 3px 3px 4px black;
+}
+.movietitle{
+    font-weight: 700;
+}
+.v-dash {
+    color: #f5c518;
+}
 
-.container {
-    background-color: var(--sec-background-color);
+.actor-image{
+    height: 190px;
+    width: 160px;
+}
+
+.actor-name{
+    font-weight: bold;
+}
+
+.cast-title{
+    font-weight: 700;
+}
+
+.see-more h4{
+    font-weight: 700;
+    color: yellow;
+}
+
+.see-more-h5 {
+    font-weight: 700;
+    /*color: black;*/
+    font-size: 12px;
+}
+
+.see-more-link {
+    text-decoration: none !important;
+}
+
+
+.review-star {
+    color: #f5c518;
 }
