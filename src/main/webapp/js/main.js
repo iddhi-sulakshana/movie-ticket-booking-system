@@ -18,7 +18,6 @@
         if(window.pageYOffset > (nav.scrollHeight + nav.scrollHeight - 20) && !nav.classList.contains('fixed-top')){
             nav.classList.add('fixed-top');
             clonenav.style.display = "block"
-            return;
         }
     }
     clonenav.style.height = nav.scrollHeight + 'px';
@@ -60,3 +59,5 @@
         tl.to(loadingbar, {width: "0", duration: 1});
     }
     loading();
+gsap.from(".animate-nav", {opacity: 0, scale:0, y: -20, duration: 1, stagger: 0.05, delay: 0.2, ease: "elastic.out(1, 0.75)" })
+gsap.from(".animate-text", {opacity: 0, y:20, duration: 0.5, stagger: 0.2, delay: 0.2, ease: "(power2.o1ut)"})

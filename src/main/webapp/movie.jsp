@@ -4,38 +4,22 @@
     <link rel="stylesheet" href="./css/movie.css">
 <%@include file="./nav.jsp" %>
 
-<%--<%--%>
-<%--    Movie movieObj = new Movie();--%>
-
-
-<%--//    Essentials es = new Essentials();--%>
-<%--//    if(request.getParameter("movieId").trim() == null || !es.isInt(request.getParameter("movieId"))){--%>
-<%--//        session.setAttribute("error", "Invalid request");--%>
-<%--//        response.sendRedirect("./");--%>
-<%--//        return;--%>
-<%--//    }--%>
-<%--//    MovieStruct movie = new MovieStruct();--%>
-<%--//    movie.TMDBid = Integer.parseInt(request.getParameter("movieId"));--%>
-<%--//    movie = movieObj.getMovie(movie.TMDBid);--%>
-<%--//    movieObj.close();--%>
-
-<%--%>--%>
-
 <%
+    String movieId = request.getParameter("movieId");
+    Essentials es = new Essentials();
+    if(request.getParameter("movieId").trim() == null || !es.isInt(request.getParameter("movieId"))){
+        session.setAttribute("error", "Invalid request");
+        response.sendRedirect("./");
+        return;
+    }
     Movie movieObj = new Movie();
     MovieStruct ms = new MovieStruct();
     ms.TMDBid = Integer.parseInt(request.getParameter("movieId"));
     ms = movieObj.getMovie(ms.TMDBid);
-
-    String movieId = request.getParameter("movieId");
+    movieObj.close();
     tmdbAPI api = new tmdbAPI();
     MovieDetails movie = api.getMovieDetails(movieId);
-
-
 %>
-
-
-
 <div class="container mt-5 mb-5">
 
     <div class="row align-items-center mb-5">
@@ -58,7 +42,7 @@
               <% } %>
               </span>
             <span class="movie-genre mb-3"></span>
-            <a class="btn btn-primary col-3" href="#" role="button">Buy Tickets</a>
+            <a class="btn btn-primary col-3" href="./selectSeat.jsp?movieId=<%=ms.TMDBid%>" role="button">Buy Tickets</a>
         </div>
     </div>
 

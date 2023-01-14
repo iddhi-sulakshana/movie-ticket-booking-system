@@ -2,15 +2,13 @@ package com.example.ticketbookingsystem;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.Updates;
 import org.bson.BsonArray;
 import org.bson.BsonString;
-import org.bson.types.ObjectId;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,6 +33,10 @@ public class Movie extends Database{
             array.add(new BsonString(item));
         }
         collection.updateOne(eq("TMDBid", id), Updates.combine(Updates.set("showdates", array), Updates.set("showtime", showtime)));
+    }
+    public String getTitle(int id){
+        MovieStruct movie =  collection.find(eq("TMDBid", id)).projection(Projections.include("title")).first();
+        return movie.title;
     }
     public int insertMovie(int id, List<String> showdates, String showtime, double price) throws IOException {
         tmdbAPI api = new tmdbAPI();

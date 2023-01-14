@@ -12,6 +12,12 @@
     <script defer src="./js/selectSeat.js"></script>
 <%@include file="./nav.jsp" %>
 <%
+    String role = (String) session.getAttribute("logRole");
+    if(role == "admin"){
+        session.setAttribute("error", "Invalid page");
+        response.sendRedirect("./mDashboard.jsp");
+        return;
+    }
     Movie movieObj = new Movie();
     Essentials es = new Essentials();
     if(request.getParameter("movieId").trim() == null || !es.isInt(request.getParameter("movieId"))){
