@@ -8,14 +8,10 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.nio.file.FileStore;
+import java.util.List;
 
 @WebServlet(name = "execute_payment", value = "/execute_payment")
 public class ExecutePaymentServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String paymentId = request.getParameter("paymentId");
@@ -27,6 +23,27 @@ public class ExecutePaymentServlet extends HttpServlet {
         String amountPaid = null;
         String paymentTime = null;
         String customerPhone = orderDetail.getCustomerPhoneNumber();
+        TicketStruct ticket = new TicketStruct();
+        ticket.TMDBid = Integer.parseInt(orderDetail.getMovieID());
+        ticket.phone = orderDetail.getCustomerPhoneNumber();
+        ticket.email = orderDetail.getCustomerEmail();
+        ticket.name = String.join(" ", orderDetail.getCustomerFirstName(), orderDetail.getCustomerLastName());
+        ticket.seats = orderDetail.getSeats();
+        ticket.showtime = orderDetail.getMovieTime();
+        ticket.showdate = orderDetail.getMovieDate();
+        ticket.price = Double.parseDouble(orderDetail.getTotal());
+        Ticket ticketObj = new Ticket();
+        List<String> seatsBooked = ticketObj.getBookedSeats(ticket.TMDBid, ticket.showtime, ticket.showdate);
+        for(String seat : seatsBooked) {
+            for(String selectedSeat : ticket.seats){
+                if(selectedSeat == seat){
+                    request.setAttribute("errorMessage", "Seat Already Booked");
+                    ticketObj.close();
+                    response.sendRedirect("error.jsp");
+                    return;
+                }
+            }
+        }
         try {
             PaymentServices paymentServices = new PaymentServices();
             Payment payment = paymentServices.executePayment(paymentId, payerId);
@@ -52,12 +69,14 @@ public class ExecutePaymentServlet extends HttpServlet {
             request.setAttribute("payer", payerInfo);
             request.setAttribute("transaction", transaction);
             request.setAttribute("paymentID", paymentId);
-
+            ticketObj.insertTicket(ticket);
+            ticketObj.close();
             request.getRequestDispatcher("receipt.jsp").forward(request, response);
 
             session.invalidate();
 
         } catch (PayPalRESTException ex) {
+            ticketObj.close();
             request.setAttribute("errorMessage", ex.getMessage());
             ex.printStackTrace();
             request.getRequestDispatcher("error.jsp").forward(request, response);
@@ -68,6 +87,7 @@ public class ExecutePaymentServlet extends HttpServlet {
 //        twillio.sendSMS("<customerPhone variable>", body); //The number that's working here is my number.
 
 
+        ticketObj.close();
     }
 
 
