@@ -14,10 +14,16 @@ import java.util.List;
 public class ExecutePaymentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        if(request.getParameter("paymentId") == null || request.getParameter("PayerID") == null ||
+                session.getAttribute("order") == null){
+            session.setAttribute("error", "Invalid request / bad request");
+            response.sendRedirect("./checkout.jsp");
+            return;
+        }
         String paymentId = request.getParameter("paymentId");
         String payerId = request.getParameter("PayerID");
 
-        HttpSession session = request.getSession();
         OrderDetails orderDetail = (OrderDetails) session.getAttribute("order");
 
         String amountPaid = null;
@@ -30,20 +36,24 @@ public class ExecutePaymentServlet extends HttpServlet {
         ticket.name = String.join(" ", orderDetail.getCustomerFirstName(), orderDetail.getCustomerLastName());
         ticket.seats = orderDetail.getSeats();
         ticket.showtime = orderDetail.getMovieTime();
+        System.out.println("movie time " + orderDetail.getMovieTime());
         ticket.showdate = orderDetail.getMovieDate();
         ticket.price = Double.parseDouble(orderDetail.getTotal());
         Ticket ticketObj = new Ticket();
         List<String> seatsBooked = ticketObj.getBookedSeats(ticket.TMDBid, ticket.showtime, ticket.showdate);
-        for(String seat : seatsBooked) {
-            for(String selectedSeat : ticket.seats){
-                if(selectedSeat == seat){
-                    request.setAttribute("errorMessage", "Seat Already Booked");
-                    ticketObj.close();
-                    response.sendRedirect("error.jsp");
-                    return;
+        if(seatsBooked != null){
+            for(String seat : seatsBooked) {
+                for(String selectedSeat : ticket.seats){
+                    if(selectedSeat == seat){
+                        request.setAttribute("errorMessage", "Seat Already Booked");
+                        ticketObj.close();
+                        response.sendRedirect("error.jsp");
+                        return;
+                    }
                 }
             }
         }
+
         try {
             PaymentServices paymentServices = new PaymentServices();
             Payment payment = paymentServices.executePayment(paymentId, payerId);

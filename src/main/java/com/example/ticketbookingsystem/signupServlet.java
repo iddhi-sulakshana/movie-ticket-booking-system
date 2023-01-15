@@ -9,6 +9,7 @@ import org.bson.types.ObjectId;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 
 @WebServlet(name = "signupServlet", value = "/signupServlet")
 public class signupServlet extends HttpServlet {
@@ -23,10 +24,15 @@ public class signupServlet extends HttpServlet {
             return;
         }
         UserStruct user = new UserStruct();
-        user.fullName = (String) request.getParameter("fullname");
-        user.email = (String) request.getParameter("email");
-        user.phone = (String) request.getParameter("phone").trim();
-        user.password = (String) request.getParameter("password");
+        user.fullName = request.getParameter("fullname");
+        user.email = request.getParameter("email");
+        user.phone = request.getParameter("phone").trim();
+        try {
+            user.password = new Encryption().encrypt(request.getParameter("password"));
+        } catch (NoSuchAlgorithmException e) {
+            response.sendRedirect("./login.jsp");
+            return;
+        }
         user.role = "user";
         User userObj = new User();
         if(userObj.isExistEmail(user.email) == 1){

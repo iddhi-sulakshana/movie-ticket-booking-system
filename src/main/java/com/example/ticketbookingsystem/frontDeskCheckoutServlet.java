@@ -12,7 +12,7 @@ import java.util.List;
 public class frontDeskCheckoutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
         if(session.getAttribute("userID") == null){
             session.setAttribute("error", "login timeout");
             response.sendRedirect("./index.jsp");
@@ -61,5 +61,7 @@ public class frontDeskCheckoutServlet extends HttpServlet {
         ticket.transactionId = "FrontDeskPayment";
         ticketObj.insertTicket(ticket);
         ticketObj.close();
+        response.sendRedirect("./");
+        return;
     }
 }

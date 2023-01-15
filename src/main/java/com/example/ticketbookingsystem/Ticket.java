@@ -35,7 +35,10 @@ public class Ticket extends Database{
     DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     public void insertTicket(TicketStruct ticket){
         int id = 0;
-        id = collection.find().projection(Projections.include("ticketId")).sort(descending("_id")).first().ticketId;
+        TicketStruct tickets = collection.find().projection(Projections.include("ticketId")).sort(descending("_id")).first();
+        if(tickets != null){
+            id = tickets.ticketId + 1;
+        }
         ticket.ticketId = ++id;
         ticket.showdate = String.format("%s-%s-%s", ticket.showdate.split("/")[2], ticket.showdate.split("/")[0], ticket.showdate.split("/")[1]);
         collection.insertOne(ticket);
@@ -51,5 +54,23 @@ public class Ticket extends Database{
     }
     public void deleteTicket(int id){
         collection.findOneAndDelete(eq("ticketId", id));
+    }
+    public double getTotalSales(){
+        MongoIterable<TicketStruct> ticket = collection.find().projection(Projections.include("price"));
+        double total = 0.00;
+        Iterator<TicketStruct> iterator = ticket.iterator();
+        while (iterator.hasNext()){
+            total += iterator.next().price;
+        }
+        return total;
+    }
+    public double getMovieSales(int id){
+        MongoIterable<TicketStruct> ticket = collection.find(eq("TMDBid", id)).projection(Projections.include("price"));
+        double total = 0.00;
+        Iterator<TicketStruct> iterator = ticket.iterator();
+        while (iterator.hasNext()){
+            total += iterator.next().price;
+        }
+        return total;
     }
 }

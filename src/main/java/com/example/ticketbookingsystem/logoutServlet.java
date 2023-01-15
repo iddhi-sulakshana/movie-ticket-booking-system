@@ -10,9 +10,11 @@ import java.io.IOException;
 public class logoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession(false);
-        session.removeAttribute("userID");
-        session.removeAttribute("logRole");
+        HttpSession session = request.getSession();
+        if(session.getAttribute("userID") != null || session.getAttribute("logRole") != null){
+            session.removeAttribute("userID");
+            session.removeAttribute("logRole");
+        }
         response.sendRedirect("./");
     }
 }

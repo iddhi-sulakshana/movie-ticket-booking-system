@@ -9,7 +9,7 @@ const movietime = document.querySelector('.movietime');
 moviedate.onchange = () => {
     if(moviedate.value == '')
         return
-    initializeSeats(2)
+    initializeSeats()
 }
 
 const seats = document.querySelectorAll('.seat-wrapper .seat')
@@ -44,7 +44,7 @@ async function initializeSeats(){
     }
     let bookedSeats = []
     // assign seat types usually gets from the database
-    await $.post("./getBookedSeatsServlet", {movieId: movieIDinput.value, showDate: moviedate.value, showTime: movietime.value},
+    await $.post("./getBookedSeatsServlet", {"name": "iddhi", movieId: movieIDinput.value, showDate: moviedate.value, showTime: movietime.value},
         function(data) {
             if(data == ""){
                 alert("Server Error Try again");

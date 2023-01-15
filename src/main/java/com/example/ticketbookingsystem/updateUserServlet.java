@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.*;
 import org.bson.types.ObjectId;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 @WebServlet(name = "updateUserServlet", value = "/updateUserServlet")
 public class updateUserServlet extends HttpServlet {
@@ -28,12 +29,23 @@ public class updateUserServlet extends HttpServlet {
             response.sendRedirect("./login.jsp");
             return;
         }
+        try {
+            password = new Encryption().encrypt(password);
+        } catch (NoSuchAlgorithmException e) {
+            response.sendRedirect("./login.jsp");
+            return;
+        }
         if(fullname != user.fullName && fullname != null)
             user.fullName = fullname;
+
         if(password != user.password && password != null)
             user.password = password;
         userObj.updateUser(user);
         userObj.close();
-        response.sendRedirect("./login.jsp");
+        if(session.getAttribute("logRole") == "admin"){
+            response.sendRedirect("./mDashboard.jsp");
+            return;
+        }
+        response.sendRedirect("./uDashboard.jsp");
     }
 }

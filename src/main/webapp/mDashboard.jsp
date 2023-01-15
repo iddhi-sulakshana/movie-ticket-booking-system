@@ -1,13 +1,10 @@
-<%@ page import="com.example.ticketbookingsystem.User" %>
 <%@ page import="org.bson.types.ObjectId" %>
-<%@ page import="com.example.ticketbookingsystem.UserStruct" %>
-<%@ page import="com.example.ticketbookingsystem.Movie" %>
 <%@ page import="java.text.DateFormat" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.example.ticketbookingsystem.MovieStruct" %>
+<%@ page import="com.example.ticketbookingsystem.*" %>
 <% //restrict accessing through url
     if(session.getAttribute("userID") == null){
         session.setAttribute("error", "Log in timeout");
@@ -99,32 +96,25 @@
                 <div class="col-lg-6 p-3">  
                     <div class="content p-3 rounded px-5">
                         <h1 class="text-center">Sales</h1>
-                        <div class="row p-2 gap-3 text-center">
-                            <div class="col sub-card rounded p-2">
-                                <h4>Total Sales</h4>
-                                <div class="price"><span class="tag">$</span>15.<span class="decimal">00</span></div>
-                            </div>
-                            <div class="col sub-card rounded p-2">
-                                <h4>Today Sales</h4>
-                                <div class="price"><span class="tag">$</span>10.<span class="decimal">00</span></div>
-                            </div>
-                        </div>
-                        <hr>
-                        <h3>Sales from Movie</h3>
-                        <select name="" id="" class="form-select text-bg-dark my-3 w-100">
+                        <select id="movieSales" class="form-select text-bg-dark my-3 w-100">
                             <option selected>Select movie</option>
-                            <option value="mv1">Movie 1</option>
-                            <option value="mv2">Movie 2</option>
-                            <option value="mv3">Movie 3</option>
+                            <% for(MovieStruct item : movies) {%>
+                            <option value="<%=item.TMDBid%>"><%=item.title%></option>
+                            <%}%>
                         </select>
                         <div class="row p-2 gap-3 text-center">
                             <div class="col sub-card rounded p-2">
                                 <h4>Total Sales</h4>
-                                <div class="price"><span class="tag">$</span>15.<span class="decimal">00</span></div>
+                                <%
+                                    Ticket ticket = new Ticket();
+                                    String sales = String.format("%.2f", ticket.getTotalSales());
+                                    ticket.close();
+                                %>
+                                <div class="price"><span class="tag">$</span><%=sales.split("\\.")[0]%><span class="decimal">.<%=sales.split("\\.")[1]%></span></div>
                             </div>
                             <div class="col sub-card rounded p-2">
-                                <h4>Today Sales</h4>
-                                <div class="price"><span class="tag">$</span>10.<span class="decimal">00</span></div>
+                                <h4>Movie Sales</h4>
+                                <div class="price" id="moviesalesprice"><span class="tag">$</span>10.<span class="decimal">00</span></div>
                             </div>
                         </div>
                     </div>
@@ -162,9 +152,6 @@
                                         <input type="text" value="<%=item.TMDBid%>" name="movieId" hidden readonly>
                                         <button type="submit" class="btn btn-outline-danger">Delete</button>
                                     </form>
-                                </div>
-                                <div class="col">
-                                    <button class="btn btn-outline-success">Edit</button>
                                 </div>
                             </div>
                         </div>
@@ -261,15 +248,15 @@
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="email">Email address</label>
-                                <input type="email" id="email" class="form-control" placeholder="Email..." name="email" value="<%=user.email%>" disabled required>
+                                <input type="email" id="email" class="form-control" placeholder="Email..." value="<%=user.email%>" readonly disabled required>
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="phoneNo">Phone Number</label>
-                                <input type="text" id="phoneNo" class="form-control" placeholder="Phone No...." name="phone" value="<%=user.phone%>" disabled required>
+                                <input type="text" id="phoneNo" class="form-control" placeholder="Phone No...." value="<%=user.phone%>" readonly disabled required>
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="password">Password</label>
-                                <input type="password" id="password" class="form-control" placeholder="Password...." name="password" value="<%=user.password%>" disabled required=""/>
+                                <input type="password" id="password" class="form-control" placeholder="Password...." name="password"  disabled required=""/>
                             </div>
                             <div class="row gap-2 text-center">
                                 <div class="col">

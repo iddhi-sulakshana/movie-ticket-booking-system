@@ -8,16 +8,27 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 
 @WebServlet(name = "loginServlet", value = "/loginServlet")
 public class loginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User objUser = new User();
         HttpSession session = request.getSession(false);
+        if(request.getParameter("email") == null || request.getParameter("password") == null){
+            session.setAttribute("error", "Bad request");
+            response.sendRedirect("./");
+        }
+        User objUser = new User();
         String inEmail = request.getParameter("email");
         String inPassword = request.getParameter("password");
         UserStruct user = objUser.getUser(inEmail);
+        try {
+            inPassword = new Encryption().encrypt(inPassword);
+        } catch (NoSuchAlgorithmException e) {
+            response.sendRedirect("./login.jsp");
+            return;
+        }
         //check email
         if (user != null) {
             //check password

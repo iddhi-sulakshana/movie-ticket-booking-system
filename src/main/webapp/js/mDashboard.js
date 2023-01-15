@@ -113,6 +113,7 @@ searchbtn.onclick = () => {
         return false;
     }
     searchbtn.classList.add('loading');
+    document.body.style.cursor = "progress";
     clearvalues()
     $.post("./getMovieDetailsServlet", {moviename: moviename.value}, function(data) {
         if(data == '-1') {
@@ -128,6 +129,7 @@ searchbtn.onclick = () => {
         bannerlink.setAttribute('href', "https://image.tmdb.org/t/p/original" + obj.banner);
         searchbtn.classList.remove('loading')
         searchsection.style.display = "block";
+        document.body.style.cursor = "default";
     });
 }
 clearvalues()

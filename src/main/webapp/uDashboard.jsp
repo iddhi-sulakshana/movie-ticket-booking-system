@@ -52,15 +52,15 @@
                         </div>
                         <div class="form-outline mb-4">
                             <label class="form-label" for="email">Email address</label>
-                            <input type="email" id="email" class="form-control" placeholder="Email..." name="email" value="<%=user.email%>" disabled required>
+                            <input type="email" id="email" class="form-control" placeholder="Email..." value="<%=user.email%>" readonly disabled required>
                         </div>
                         <div class="form-outline mb-4">
                             <label class="form-label" for="phoneNo">Phone Number</label>
-                            <input type="text" id="phoneNo" class="form-control" placeholder="Phone No...." name="phone" value="<%=user.phone%>" disabled required>
+                            <input type="text" id="phoneNo" class="form-control" placeholder="Phone No...." value="<%=user.phone%>" readonly disabled required>
                         </div>
                         <div class="form-outline mb-4">
                             <label class="form-label" for="password">Password</label>
-                            <input type="password" id="password" class="form-control" placeholder="Password...." name="password" value="<%=user.password%>" disabled required=""/>
+                            <input type="password" id="password" class="form-control" placeholder="Password...." name="password" disabled required=""/>
                         </div>
                         <div class="row gap-2 text-center">
                             <div class="col">
