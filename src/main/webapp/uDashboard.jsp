@@ -1,6 +1,7 @@
 <%@ page import="org.bson.types.ObjectId" %>
-<%@ page import="com.example.ticketbookingsystem.User" %>
-<%@ page import="com.example.ticketbookingsystem.UserStruct" %><% //restrict access through url
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.ticketbookingsystem.*" %>
+<% //restrict access through url
     if(session.getAttribute("userID") == null){
         response.sendRedirect("./index.jsp");
         return;
@@ -75,62 +76,56 @@
             <div class="col-lg-4 p-3">
                 <div class="dcontent p-4 rounded-3">
                     <h4 class="text-center mb-4">Tickets</h4>
-                    <div class="row text-center text-danger d-none">
+                    <%
+                        Ticket ticketObj = new Ticket();
+                        List<TicketStruct> tickets = ticketObj.getUserTickets(user.email, user.phone);
+                        System.out.println(tickets);
+                        ticketObj.close();
+                        if(tickets.isEmpty()){
+                    %>
+                    <div class="row text-center text-danger">
                         <div class="col">
                             <h3>No Tickets</h3>
                         </div>
                     </div>
                     <div class="row row-cols-1 gap-3">
+                        <%
+                            } else {
+                                for(TicketStruct ticket : tickets){
+                                    Movie movieObj = new Movie();
+                                    MovieStruct movie = movieObj.getMovie(ticket.TMDBid);
+                                    movieObj.close();
+                        %>
                         <!-- ticket -->
                         <div class="col">
                             <div class="ticket p-2 px-4">
                                 <div class="row text-center">
                                     <div class="col-sm-2 price d-flex justify-content-center align-items-center">
-                                        <p>$50.00</p>
+                                        <p>$<%=String.format("%.2f",ticket.price)%></p>
                                     </div>
                                     <div class="col-sm-8 my-3">
-                                        <div class="t-title">Spider Man</div>
-                                        <div class="t-time"><i class="fa-light fa-calendar-days"></i> 2022/02/03</div>
-                                        <div class="t-time"><i class="fa-light fa-clock"></i> 06:00 PM</div>
+                                        <div class="t-title"><%=movie.title%></div>
+                                        <div class="t-time"><i class="fa-light fa-calendar-days"></i> <%=ticket.showdate%></div>
+                                        <div class="t-time"><i class="fa-light fa-clock"></i> <%=ticket.showtime%></div>
                                         <div class="row mt-2">
                                             <div class="col">
-                                                <button class="btn btn-outline-danger">Cancel</button>
+                                                <button class="btn btn-outline-danger" onclick="location.href='./cancelTicketServlet?ticketId=<%=ticket.ticketId%>'">Cancel</button>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-2 d-grid seat">
                                         <i class="fa-light fa-seat-airline"></i>
-                                        <div>A3</div>
-                                        <div>B3</div>
+                                        <%
+                                            for(String seat: ticket.seats){
+                                        %>
+                                        <div><%=seat%></div>
+                                        <%}%>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- end ticket -->
-                        <div class="col">
-                            <div class="ticket p-2 px-4">
-                                <div class="row text-center">
-                                    <div class="col-sm-2 price d-flex justify-content-center align-items-center">
-                                        <p>$50.00</p>
-                                    </div>
-                                    <div class="col-sm-8 my-3">
-                                        <div class="t-title">Spider Man</div>
-                                        <div class="t-date"><i class="fa-light fa-calendar-days"></i> 2022/02/03</div>
-                                        <div class="t-time"><i class="fa-light fa-clock"></i> 06:00 PM</div>
-                                        <div class="row mt-2">
-                                            <div class="col">
-                                                <button class="btn btn-outline-danger">Cancel</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2 d-grid seat">
-                                        <i class="fa-light fa-seat-airline"></i>
-                                        <div>A3</div>
-                                        <div>B3</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <% }} %>
                     </div>
                 </div>
             </div>
@@ -167,7 +162,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                    <form action="./deleteUserServlet" method="post">
+                        <input type="submit" class="btn btn-outline-danger">Delete</input>
+                    </form>
                 </div>
             </div>
         </div>

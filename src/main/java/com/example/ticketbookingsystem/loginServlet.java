@@ -11,9 +11,9 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "loginServlet", value = "/loginServlet")
 public class loginServlet extends HttpServlet {
-    User objUser = new User();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User objUser = new User();
         HttpSession session = request.getSession(false);
         String inEmail = request.getParameter("email");
         String inPassword = request.getParameter("password");
@@ -25,28 +25,22 @@ public class loginServlet extends HttpServlet {
             if (user.password.equals(inPassword)) {
                 switch (user.role) {
                     case "admin":
-                        objUser.close();
                         //admin account
                         session.setAttribute("logRole", "admin");
                         response.sendRedirect("mDashboard.jsp");
                         break;
                     case "frontdesk":
-                        objUser.close();
                         //frontdest account
                         session.setAttribute("logRole", "frontdesk");
                         response.sendRedirect("uDashboard.jsp");
-
                         break;
                     default:
-                        objUser.close();
                         //user account
                         session.setAttribute("logRole", "user");
                         response.sendRedirect("uDashboard.jsp");
                         break;
                 }
                 session.setAttribute("userID", user._id);
-
-
             } else {
                 objUser.close();
                 session.setAttribute("loginPasswordError", " ! Invalid Password");

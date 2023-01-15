@@ -35,7 +35,6 @@ public class ReviewPaymentServlet extends HttpServlet {
             request.setAttribute("transaction", transaction);
             request.setAttribute("shippingAddress", shippingAddress);
             request.setAttribute("order", orderDetail);
-
             String seats = String.join(", ", orderDetail.getSeats());
             request.setAttribute("seats", seats);
 
