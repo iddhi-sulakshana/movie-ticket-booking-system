@@ -1,5 +1,4 @@
 <%@include file="./header.jsp" %>
-    <title>ABC Movies</title>
     <link rel="stylesheet" href="./css/about-css.css">
 <%@include file="./nav.jsp" %>
 <!-- Section -->

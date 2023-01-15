@@ -23,7 +23,6 @@
     userObj.close();
 %>
 <%@include file="./header.jsp" %>
-    <title>ABC Movies</title>
     <link rel="stylesheet" href="./css/mDashboard.css">
     <link rel="stylesheet" href="./jquery/jquery-ui.css">
     <script defer src="./jquery/jquery.min.js"></script>
@@ -114,7 +113,7 @@
                             </div>
                             <div class="col sub-card rounded p-2">
                                 <h4>Movie Sales</h4>
-                                <div class="price" id="moviesalesprice"><span class="tag">$</span>10.<span class="decimal">00</span></div>
+                                <div class="price" id="moviesalesprice">N/A</div>
                             </div>
                         </div>
                     </div>

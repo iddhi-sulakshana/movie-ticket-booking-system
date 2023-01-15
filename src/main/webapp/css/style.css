@@ -79,40 +79,6 @@
     .navbar-toggler {
         color: var(--primary-font-color);
     }
-    .search-box{
-        position:relative;
-        width:0px;
-        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55 );
-    }
-    .search-box.active{
-        width: 200px;
-    }
-    .search-box input {
-        opacity: 0;
-    }
-    .search-box.active input{
-        opacity:1;
-    }
-    .search-box .search-btn{
-        height:40px;
-        width:40px;
-        background:transparent;
-        color:var(--primary-font-color);
-        position: absolute;
-        top:50%;
-        right:-40px;
-        transform: translateY(-50%);
-        line-height:40px;
-        text-align:center;
-        border-radius:50%;
-        cursor:pointer;
-        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        transition: color 0.25s;
-        z-index:2;
-    }
-    .search-box .search-btn.close {
-        color: var(--special-color);
-    }
     #usericon{
         padding: 0.5rem 0.8rem;
         cursor: pointer;

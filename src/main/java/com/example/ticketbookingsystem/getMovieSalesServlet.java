@@ -35,8 +35,7 @@ public class getMovieSalesServlet extends HttpServlet {
             double sales = ticket.getMovieSales(id);
             ticket.close();
             Gson gson = new Gson();
-            System.out.println(sales);
-            response.getWriter().write(gson.toJson(sales));
+            response.getWriter().write(gson.toJson(String.format("%.2f", sales)));
         }
         try {
 
