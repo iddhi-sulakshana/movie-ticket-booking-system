@@ -28,14 +28,6 @@
             <a class="nav-link" href="./AboutUs.jsp">About</a>
           </li>
         </ul>
-        <div class="animate-nav nav-item" style="margin-right: 2rem;">
-          <div class="search-box">
-            <input type="text" class="inputbox" placeholder="Type to search..."/>
-            <div class="search-btn">
-              <i class="fa-light fa-search"></i>
-            </div>
-          </div>
-        </div>
         <a href="./login.jsp"><div class="animate-nav nav-item p-2">
           <i id="usericon" class="fa-light fa-user"></i>
         </div>

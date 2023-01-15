@@ -39,7 +39,6 @@
     }
 %>
 <%@include file="./header.jsp" %>
-    <title>ABC Movies</title>
     <link rel="stylesheet" href="./css/checkout.css">
     <script defer src="./js/checkout.js"></script>
 <%@include file="./nav.jsp" %>

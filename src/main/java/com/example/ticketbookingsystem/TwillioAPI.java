@@ -12,8 +12,7 @@ public class TwillioAPI {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message message = Message.creator(
                         new com.twilio.type.PhoneNumber(to),
-                        new com.twilio.type.PhoneNumber("+13608187449"), body)
-                .create();
+                        new com.twilio.type.PhoneNumber("+13608187449"), body).create();
 
         System.out.println(message.getSid());
     }

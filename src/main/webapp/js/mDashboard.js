@@ -133,3 +133,19 @@ searchbtn.onclick = () => {
     });
 }
 clearvalues()
+const moviesales = document.getElementById("movieSales");
+const moviesalesprice = document.getElementById("moviesalesprice");
+moviesales.onchange = () => {
+    document.body.style.cursor = "progress"
+    $.post("./getMovieSalesServlet", {movieId: moviesales.value}, function(data) {
+        if(data == '-1') {
+            alert("No matching sales found");
+            document.body.style.cursor = "default"
+            return;
+        }
+        const price = JSON.parse(data);
+        const tag = "<span class='tag'>$</span>"+price.split(".")[0]+"<span class='decimal'>."+price.split('.')[1]+"</span>";
+        moviesalesprice.innerHTML = tag
+        document.body.style.cursor = "default";
+    });
+}

@@ -1,6 +1,5 @@
 <%@ page import="com.example.ticketbookingsystem.*" %>
 <%@include file="./header.jsp" %>
-    <title>ABC Movies</title>
     <link rel="stylesheet" href="./css/movie.css">
 <%@include file="./nav.jsp" %>
 
