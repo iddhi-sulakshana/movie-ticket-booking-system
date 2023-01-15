@@ -36,7 +36,7 @@
         <span class="movie-plot-title shadow mb-2" style="color: white">Overview:</span><br>
         <span class="movie-plot-body shadow mb-3" style="color: white"><%= ms.description %></span><br>
         <span class="movie-director shadow mb-3" style="color: white">Director:<span class="movie-director-name ms-1 mb-3"><%=movie.director%></span></span><br>
-        <button class="btn btn-outline-primary" onclick="location.href='./selectSeat.jsp?movieId=<%=ms.TMDBid%>'">Book Ticket</button>
+        <button class="btn btn-primary" onclick="location.href='./selectSeat.jsp?movieId=<%=ms.TMDBid%>'">Book Ticket</button>
     </div>
 </div>
 <div class="container p-5 mb-5">

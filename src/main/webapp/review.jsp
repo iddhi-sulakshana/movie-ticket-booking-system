@@ -24,7 +24,7 @@
             <input type="hidden" name="PayerID" value="${param.PayerID}" />
 
             <div class="row justify-content-center">
-                <div class="col-lg-5 m-5 p-4 order-summary">
+                <div class="col-lg-5 mt-5 ms-5 me-5 mb-3 p-4 order-summary">
                     <div class="row">
                         <div class="col">
                             <h2 class="mt-4">ORDER SUMMARY</h2>
@@ -60,14 +60,24 @@
                             <h6 class="text-muted">Amount Payable</h6>
                         </div>
                         <div class="col-lg-6 d-flex justify-content-end">
-                            <span class="amount currency me-2">LKR</span>
+                            <span class="amount currency me-2">USD</span>
                             <span class="amount price">${order.total}</span>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-primary"><i class="fab fa-paypal me-2"></i>Pay Now</button>
+                    <button type="submit" class="btn btn-lg btn-warning"><i class="fab fa-paypal me-2"></i>Pay Now</button><br>
+
                 </div>
+
+
             </div>
         </form>
+
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <a class="btn btn-primary" href="index.jsp" role="button">Return Home</a>
+            </div>
+        </div>
+
     </div>
 
 
