@@ -21,6 +21,7 @@
     <script src="./js/gsap.min.js"></script>
     <script defer src="./js/main.js"></script>
     <script src="js/feedback.js"></script>
+    <script src="js/cancelmail.js"></script>
     <!-- Email Service Scripts -->
     <script type="text/javascript"
             src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
@@ -32,5 +33,9 @@
          if(sessionStorage.getItem("feedbackMsg") !== null) {
             window.alert(sessionStorage.getItem("feedbackMsg"));
             sessionStorage.removeItem("feedbackMsg");
+        }
+        if(sessionStorage.getItem("CancelMsg") !== null) {
+            window.alert(sessionStorage.getItem("CancelMsg"));
+            sessionStorage.removeItem("CancelMsg");
         }
     </script>
