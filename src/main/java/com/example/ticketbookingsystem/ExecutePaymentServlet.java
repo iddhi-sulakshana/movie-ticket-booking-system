@@ -89,8 +89,9 @@ public class ExecutePaymentServlet extends HttpServlet {
 
 
         TwillioAPI twillio = new TwillioAPI();
-        String body = "Payment to ABC Movies was completed at " + paymentTime + ". Transaction ID: " + paymentId + ", Paid Amount: $" + amountPaid + ", Seat Numbers : " + seatsBooked;
-        twillio.sendSMS(customerPhone, body); //phone number must be registerd in twillio
+        String seats = "";
+        String body = "Payment to ABC Movies was completed at " + paymentTime + ". Transaction ID: " + paymentId + ", Paid Amount: $" + amountPaid + ", Seat Numbers : " + ticket.seats;
+        twillio.sendSMS("+94"+customerPhone, body); //phone number must be registerd in twillio
 
 
         ticketObj.close();
