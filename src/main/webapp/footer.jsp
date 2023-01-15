@@ -36,7 +36,7 @@
                     <h4 class="text-md-right">Give us Feedback</h4>
                     <hr>
 
-                    <form method="post" name="feedbackForm">
+                    <form method="post" name="feedbackForm" id="feedbackForm">
                         <fieldset class="form-group">
                             <input name="email" id="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" required>
                         </fieldset>
@@ -52,7 +52,6 @@
 <%--                        <input type="hidden" name="_subject" value="Feedback From a User">--%>
 <%--                        <input type="hidden" name="_autoresponse" value="Thank you for your Feedback">--%>
 <%--                        <input type="hidden" name="_next" value="http://localhost:8080/TicketBookingSystem_war_exploded/">--%>
-
                     </form>
                 </div>
             </div>

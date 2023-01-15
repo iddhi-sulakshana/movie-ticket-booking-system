@@ -28,4 +28,8 @@
         (function(){
             emailjs.init("98K5qcw7Se_9wuuAX");
         })();
+         if(sessionStorage.getItem("feedbackMsg") !== null) {
+            window.alert(sessionStorage.getItem("feedbackMsg"));
+            sessionStorage.removeItem("feedbackMsg");
+        }
     </script>
