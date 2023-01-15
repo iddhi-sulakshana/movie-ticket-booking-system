@@ -4,7 +4,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@include file="./header.jsp" %>
-    <title>ABC Movies</title>
     <link rel="stylesheet" href="./jquery/jquery-ui.css">
     <link rel="stylesheet" href="./css/selectSeat.css">
     <script defer src="./jquery/jquery.min.js"></script>

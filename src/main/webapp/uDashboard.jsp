@@ -21,7 +21,6 @@
     userObj.close();
 %>
 <%@include file="./header.jsp" %>
-    <title>ABC Movies</title>
     <link rel="stylesheet" href="./css/uDashboard.css">
     <script defer src="./js/uDashboard.js"></script>
 <%@include file="./nav.jsp" %>

@@ -7,7 +7,6 @@
 <%@ page import="java.text.DateFormat" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@include file="./header.jsp" %>
-    <title>ABC Movies</title>
     <link rel="stylesheet" href="./css/home.css">
 <script defer src="./jquery/jquery.min.js"></script>
     <script defer src="./js/home.js"></script>

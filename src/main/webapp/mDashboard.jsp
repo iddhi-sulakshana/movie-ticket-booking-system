@@ -23,7 +23,6 @@
     userObj.close();
 %>
 <%@include file="./header.jsp" %>
-    <title>ABC Movies</title>
     <link rel="stylesheet" href="./css/mDashboard.css">
     <link rel="stylesheet" href="./jquery/jquery-ui.css">
     <script defer src="./jquery/jquery.min.js"></script>
