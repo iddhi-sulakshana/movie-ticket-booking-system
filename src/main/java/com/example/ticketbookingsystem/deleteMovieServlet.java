@@ -3,30 +3,28 @@ package com.example.ticketbookingsystem;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import org.bson.types.ObjectId;
 
 import java.io.IOException;
 
-@WebServlet(name = "deleteUserServlet", value = "/deleteUserServlet")
-public class deleteUserServlet extends HttpServlet {
+@WebServlet(name = "deleteMovieServlet", value = "/deleteMovieServlet")
+public class deleteMovieServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         if(session.getAttribute("userID") == null){
+            session.setAttribute("error", "Log in timeout");
             response.sendRedirect("./index.jsp");
             return;
         }
-        ObjectId userId = (ObjectId) session.getAttribute("userID");
-        String role = (String) session.getAttribute("logRole");
-        if (role != "user") {
+        if (session.getAttribute("logRole") != "admin") {
+            session.setAttribute("error", "Unauthorized page");
             response.sendRedirect("index.jsp");
             return;
         }
-        User userObj = new User();
-        userObj.deleteUser(userId);
-        userObj.close();
-        session.removeAttribute("userID");
-        session.removeAttribute("logRole");
-        response.sendRedirect("./");
+        int id = Integer.parseInt(request.getParameter("movieId"));
+        Movie movieObj = new Movie();
+        movieObj.deleteMovie(id);
+        session.setAttribute("error", "Movie deleted successful");
+        response.sendRedirect("./mDashboard.jsp");
     }
 }

@@ -13,6 +13,7 @@ import java.util.List;
 public class AuthorizePaymentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         if(request.getParameter("TMDBid") == null || request.getParameter("fname") == null ||
                 request.getParameter("lname") == null || request.getParameter("email") == null ||
                 request.getParameter("phone") == null || request.getParameter("total") == null ||
@@ -20,7 +21,6 @@ public class AuthorizePaymentServlet extends HttpServlet {
                 request.getParameter("seats") == null || request.getParameter("moviedate") == null ||
                 request.getParameter("movietime") == null)
         {
-            HttpSession session = request.getSession();
             session.setAttribute("error", "Invalid request");
             response.sendRedirect("./");
             return;
@@ -44,7 +44,6 @@ public class AuthorizePaymentServlet extends HttpServlet {
         OrderDetails orderDetails = new OrderDetails(firstName, lastName, email, userPhoneNumber, movieName, totalSeats,
                 seats, total, movieID, movieTime, movieDate);
 
-        HttpSession session = request.getSession();
         session.setAttribute("order", orderDetails);
 
         try {

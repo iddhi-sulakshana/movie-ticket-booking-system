@@ -1,5 +1,4 @@
-        <%@ page import="com.example.ticketbookingsystem.Movie" %>
-<%@ page import="com.example.ticketbookingsystem.TicketStruct" %>
+    <%@ page import="com.example.ticketbookingsystem.Movie" %>
 <%@ page import="com.example.ticketbookingsystem.UserStruct" %>
 <%@ page import="com.example.ticketbookingsystem.User" %>
 <%@ page import="org.bson.types.ObjectId" %>
@@ -33,7 +32,7 @@
     user.fullName = "";
     user.email = "";
     user.phone = "";
-    if (session.getAttribute("userID") != null) {
+    if (session.getAttribute("userID") != null && session.getAttribute("logRole") != "frontdesk") {
         User userObj = new User();
         user = userObj.getUser((ObjectId) session.getAttribute("userID"));
         userObj.close();
@@ -49,7 +48,7 @@
         <div class="row my-2">
             <div class="col-12 col-lg-8 p-2">
                 <div class="display p-2 rounded">
-                    <form action="authorize_payment" method="post">
+                    <form action="<%if(session.getAttribute("logRole") == "frontdesk"){%>frontDeskCheckoutServlet<%}else{%>authorize_payment<%}%>" method="post">
                         <input type="text" name="TMDBid" readonly hidden value="<%=movieID%>">
                         <input type="text" name="moviedate" readonly hidden value="<%=movieDate%>">
                         <input type="text" name="movietime" readonly hidden value="<%=movieTime%>">
@@ -106,7 +105,7 @@
                         <div class="text-center">Payment method</div>
                         <div class="row">
                             <div class="col px-5 py-3">
-                                <button class="btn btn-success w-100"><i class="fa-brands fa-paypal"></i> Paypal</button>
+                                <button class="btn btn-success w-100"><%if(session.getAttribute("logRole") == "frontdesk"){%>Pay Now<%}else{%><i class="fa-brands fa-paypal"></i> Paypal<%}%></button>
                             </div>
                         </div>
                     </form>

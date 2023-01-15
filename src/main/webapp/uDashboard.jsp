@@ -3,16 +3,20 @@
 <%@ page import="com.example.ticketbookingsystem.*" %>
 <% //restrict access through url
     if(session.getAttribute("userID") == null){
+        session.setAttribute("error", "Log in timeout");
         response.sendRedirect("./index.jsp");
         return;
     }
+    System.out.println(session.getAttribute("userID"));
+    System.out.println(session.getAttribute("logRole"));
     ObjectId userId = (ObjectId) session.getAttribute("userID");
     String role = (String) session.getAttribute("logRole");
-    User userObj = new User();
-    if (role != "user") {
+    if (role == "admin") {
+        session.setAttribute("error", "Unauthorized Page");
         response.sendRedirect("index.jsp");
         return;
     }
+    User userObj = new User();
     UserStruct user = userObj.getUser(userId);
     userObj.close();
 %>
@@ -163,7 +167,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cancel</button>
                     <form action="./deleteUserServlet" method="post">
-                        <input type="submit" class="btn btn-outline-danger">Delete</input>
+                        <input type="submit" class="btn btn-outline-danger" value="Delete">
                     </form>
                 </div>
             </div>

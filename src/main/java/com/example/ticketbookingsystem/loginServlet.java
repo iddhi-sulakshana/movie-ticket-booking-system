@@ -18,7 +18,6 @@ public class loginServlet extends HttpServlet {
         String inEmail = request.getParameter("email");
         String inPassword = request.getParameter("password");
         UserStruct user = objUser.getUser(inEmail);
-
         //check email
         if (user != null) {
             //check password

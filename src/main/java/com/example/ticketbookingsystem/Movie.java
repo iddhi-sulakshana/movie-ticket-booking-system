@@ -68,7 +68,7 @@ public class Movie extends Database{
     }
     public List<String> getDates(String showtime) {
         List<String> showdates = new ArrayList<>();
-        FindIterable<MovieStruct> movies = collection.find(eq("showtime", showtime));
+        FindIterable<MovieStruct> movies = collection.find(eq("showtime", showtime)).projection(Projections.include("showdates"));
         Iterator<MovieStruct> iterator = movies.iterator();
         while(iterator.hasNext()){
             for(String date : iterator.next().showdates){
@@ -81,6 +81,15 @@ public class Movie extends Database{
     }
     public List<MovieStruct> getMovies(){
         FindIterable<MovieStruct> results = collection.find(Filters.gte("showdates", format.format(new Date())));
+        List<MovieStruct> movies = new ArrayList<>();
+        Iterator<MovieStruct> iterator = results.iterator();
+        while (iterator.hasNext()){
+            movies.add(iterator.next());
+        }
+        return movies;
+    }
+    public List<MovieStruct> getAllMovies(){
+        FindIterable<MovieStruct> results = collection.find();
         List<MovieStruct> movies = new ArrayList<>();
         Iterator<MovieStruct> iterator = results.iterator();
         while (iterator.hasNext()){

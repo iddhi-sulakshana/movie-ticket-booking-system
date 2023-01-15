@@ -50,7 +50,7 @@
     for (String date: movie.getDates("16:00")) {
         time3.add(String.format("'%s'", date));
     }
-    List<MovieStruct> movies = movie.getMovies();
+    List<MovieStruct> movies = movie.getAllMovies();
     movie.close();
 %>
 <script>
@@ -158,7 +158,10 @@
                             <hr>
                             <div class="row g-2">
                                 <div class="col">
-                                    <button class="btn btn-outline-danger">Delete</button>
+                                    <form action="./deleteMovieServlet" method="post">
+                                        <input type="text" value="<%=item.TMDBid%>" name="movieId" hidden readonly>
+                                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                    </form>
                                 </div>
                                 <div class="col">
                                     <button class="btn btn-outline-success">Edit</button>

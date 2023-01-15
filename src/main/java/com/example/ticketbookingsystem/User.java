@@ -2,6 +2,7 @@ package com.example.ticketbookingsystem;
 
 import com.mongodb.client.ClientSession;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import org.bson.types.ObjectId;
 
@@ -24,9 +25,7 @@ public class User extends Database{
     }
     public void updateUser(UserStruct update){
         collection.findOneAndUpdate(eq("_id", update._id), Updates.combine(
-                Updates.set("email", update.email),
                 Updates.set("password", update.password),
-                Updates.set("phone", update.phone),
                 Updates.set("fullName", update.fullName)
         ));
     };

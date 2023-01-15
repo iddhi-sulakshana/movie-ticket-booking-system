@@ -22,8 +22,6 @@ public class updateUserServlet extends HttpServlet {
         User userObj = new User();
         UserStruct user = userObj.getUser(userId);
         String fullname = request.getParameter("fullname");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         if(user == null){
             userObj.close();
@@ -32,10 +30,6 @@ public class updateUserServlet extends HttpServlet {
         }
         if(fullname != user.fullName && fullname != null)
             user.fullName = fullname;
-        if(email != user.email && email != null)
-            user.email = email;
-        if(phone != user.phone && phone != null)
-            user.phone = phone;
         if(password != user.password && password != null)
             user.password = password;
         userObj.updateUser(user);

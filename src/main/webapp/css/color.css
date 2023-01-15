@@ -9,7 +9,7 @@
     --background-color:var(--dark-black);
     --primary-font-color: var(--white);
     --sec-font-color: var(--grey);
-    --special-color: var(--red);
-
+    --special-color: #0d6efd;
+    --sec-special-color: #106187;
     --sec-background-color: var(--light-dark);
 }

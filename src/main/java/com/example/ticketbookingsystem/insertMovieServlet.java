@@ -46,6 +46,7 @@ public class insertMovieServlet extends HttpServlet {
         if(success == 1) {
             session.setAttribute("error", "Movie already Exist");
         }
+        session.setAttribute("error", "Movie Inserted successful");
         response.sendRedirect("./mDashboard.jsp");
     }
 }
