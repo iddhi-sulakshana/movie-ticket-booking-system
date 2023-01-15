@@ -114,7 +114,6 @@
                                             <div class="col">
                                                 <button class="btn btn-outline-danger" onclick="location.href='./cancelTicketServlet?ticketId=<%=ticket.ticketId%>'">Cancel</button>
                                                 <input type="movieid" id="movieid" value="<%=movie.title%>" hidden>
-                                                <button onclick="cancelBook()">testing</button>
                                             </div>
                                         </div>
                                     </div>

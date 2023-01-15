@@ -34,8 +34,8 @@
             window.alert(sessionStorage.getItem("feedbackMsg"));
             sessionStorage.removeItem("feedbackMsg");
         }
-        if(sessionStorage.getItem("CancelMsg") !== null) {
-            window.alert(sessionStorage.getItem("CancelMsg"));
-            sessionStorage.removeItem("CancelMsg");
-        }
+        // if(sessionStorage.getItem("CancelMsg") !== null) {
+        //     window.alert(sessionStorage.getItem("CancelMsg"));
+        //     sessionStorage.removeItem("CancelMsg");
+        // }
     </script>
