@@ -90,7 +90,7 @@
         <dependency>
             <groupId>com.twilio.sdk</groupId>
             <artifactId>twilio</artifactId>
-            <version>7.53.0</version>
+            <version>9.2.1</version>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
