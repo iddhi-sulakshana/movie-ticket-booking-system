@@ -15,6 +15,8 @@ import java.security.NoSuchAlgorithmException;
 public class signupServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        String confirmPassword = request.getParameter("confirmPassword");
         if(request.getParameter("fullname") == null ||
             request.getParameter("email") == null ||
             request.getParameter("phone") == null ||
@@ -36,11 +38,19 @@ public class signupServlet extends HttpServlet {
         user.role = "user";
         User userObj = new User();
         if(userObj.isExistEmail(user.email) == 1){
-            response.sendRedirect("./login.jsp");
+            session.setAttribute("signError", " This Email already exist. try another one !");
+            response.sendRedirect("login.jsp");
             return;
+
         }
         if(userObj.isExistPhone(user.phone) == 1){
-            response.sendRedirect("./login.jsp");
+            session.setAttribute("signError", " This phone number already exist. try another one !");
+            response.sendRedirect("login.jsp");
+            return;
+        }
+        if(!request.getParameter("password").equals(confirmPassword)){
+            session.setAttribute("signError", " Passwords are not matching !");
+            response.sendRedirect("login.jsp");
             return;
         }
         userObj.createUser(user);

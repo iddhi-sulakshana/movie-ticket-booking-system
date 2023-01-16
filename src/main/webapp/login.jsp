@@ -55,6 +55,13 @@
 						<div class="signup-link">don't have an account?<a href="" style="color: #0000FF;"> Signup Now</a></div>
 					</form>
 					<form name="signInForm" action="./signupServlet" class="signup" method="post">
+						<div>
+							<% String messageS = (String) session.getAttribute("signError");
+								if(messageS != null) {
+									out.print("<p style='color:red; font-size: 13px;'>" + messageS + "</p>");
+									session.removeAttribute("signError");
+								} %>
+						</div>
 						<div class="field">
 							<input type="text" placeholder="Full Name" name="fullname" required>
 						</div>
@@ -68,11 +75,11 @@
 							<input type="password" placeholder="Password" name="password" required>
 						</div>
 						<div class="field">
-							<input type="password" placeholder="Confirm password" required>
+							<input type="password" placeholder="Confirm password" name="confPassword" required>
 						</div>
 						<div class="field btn">
 							<div class="btn-layer"></div>
-							<input type="submit" value="Signup">
+							<input type="submit" value="Signup" onclick="validSignup()">
 						</div>
 					</form>
 				</div>
