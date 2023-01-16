@@ -39,18 +39,18 @@ public class signupServlet extends HttpServlet {
         user.role = "user";
         User userObj = new User();
         if(userObj.isExistEmail(user.email) == 1){
-            session.setAttribute("signError", " This Email already exist. try another one !");
+            session.setAttribute("signError", " Signup Failed! This email already exist, try another one.");
             response.sendRedirect("login.jsp");
             return;
 
         }
         if(userObj.isExistPhone(user.phone) == 1){
-            session.setAttribute("signError", " This phone number already exist. try another one !");
+            session.setAttribute("signError", " Signup Failed! This phone number already exist, try another one.");
             response.sendRedirect("login.jsp");
             return;
         }
         if( !password.equals(confirmPassword) ){
-            session.setAttribute("signError", " Passwords are not matching !");
+            session.setAttribute("signError", " Signup Failed! Passwords are not matching.");
             response.sendRedirect("login.jsp");
             return;
         }

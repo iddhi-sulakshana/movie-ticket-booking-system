@@ -28,6 +28,13 @@
 				</div>
 				<div class="form-inner">
 					<form name="logInForm" action="./loginServlet" class="login" method="post">
+						<div>
+							<% String messageS = (String) session.getAttribute("signError");
+								if(messageS != null) {
+									out.print("<p style='color:red; font-size: 13px;'>" + messageS + "</p>");
+									session.removeAttribute("signError");
+								} %>
+						</div>
 						<div class="field">
 							<input class="npt" name="email" type="text" placeholder="Email Address" required>
 						</div>
@@ -55,13 +62,7 @@
 						<div class="signup-link">don't have an account?<a href="" style="color: #0000FF;"> Signup Now</a></div>
 					</form>
 					<form name="signInForm" action="./signupServlet" class="signup" method="post">
-						<div>
-							<% String messageS = (String) session.getAttribute("signError");
-								if(messageS != null) {
-									out.print("<p style='color:red; font-size: 13px;'>" + messageS + "</p>");
-									session.removeAttribute("signError");
-								} %>
-						</div>
+
 						<div class="field">
 							<input type="text" placeholder="Full Name" name="fullname" required>
 						</div>
