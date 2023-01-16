@@ -75,7 +75,7 @@
 							<input type="password" placeholder="Password" name="password" required>
 						</div>
 						<div class="field">
-							<input type="password" placeholder="Confirm password" name="confPassword" required>
+							<input type="password" placeholder="Confirm password" name="confirmPassword" required>
 						</div>
 						<div class="field btn">
 							<div class="btn-layer"></div>

@@ -17,6 +17,7 @@ public class signupServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         String confirmPassword = request.getParameter("confirmPassword");
+        String password = request.getParameter("password");
         if(request.getParameter("fullname") == null ||
             request.getParameter("email") == null ||
             request.getParameter("phone") == null ||
@@ -48,7 +49,7 @@ public class signupServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
             return;
         }
-        if(!request.getParameter("password").equals(confirmPassword)){
+        if( !password.equals(confirmPassword) ){
             session.setAttribute("signError", " Passwords are not matching !");
             response.sendRedirect("login.jsp");
             return;
