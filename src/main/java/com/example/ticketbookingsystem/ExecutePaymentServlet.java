@@ -73,9 +73,16 @@ public class ExecutePaymentServlet extends HttpServlet {
             request.setAttribute("payer", payerInfo);
             request.setAttribute("transaction", transaction);
             request.setAttribute("paymentID", paymentId);
-            ticket.transactionId = paymentId;
+            ticket.transactionId = transaction.getRelatedResources().get(0).getSale().getId();
             ticketObj.insertTicket(ticket);
             ticketObj.close();
+
+            // send sms
+            TwillioAPI twillio = new TwillioAPI();
+            String body = "Payment to ABC Movies was completed at " + paymentTime + ". Transaction ID: " + paymentId + ", Paid Amount: $" + amountPaid + ", Seat Numbers : " + ticket.seats;
+            //uncomment below code to send sms
+            //twillio.sendSMS("+94"+customerPhone, body); //phone number must be registerd in twillio
+
             request.getRequestDispatcher("receipt.jsp").forward(request, response);
 
             session.removeAttribute("order");
@@ -86,14 +93,6 @@ public class ExecutePaymentServlet extends HttpServlet {
             ex.printStackTrace();
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
-
-
-        TwillioAPI twillio = new TwillioAPI();
-        String seats = "";
-        String body = "Payment to ABC Movies was completed at " + paymentTime + ". Transaction ID: " + paymentId + ", Paid Amount: $" + amountPaid + ", Seat Numbers : " + ticket.seats;
-        //uncomment below code to send sms
-        //twillio.sendSMS("+94"+customerPhone, body); //phone number must be registerd in twillio
-
 
         ticketObj.close();
     }

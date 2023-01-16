@@ -11,7 +11,7 @@ async function cancelBook(e) {
     const serviceID = "service_xurl44v";
     const templateID = "template_9tpw9g4";
     console.log("asd")
-    //await emailjs.send(serviceID, templateID, params)  //uncomment this line to send email
+    await emailjs.send(serviceID, templateID, params)  //uncomment this line to send email
     sessionStorage.setItem("CancelMsg", "Your ticket was cancelled and the refund request was sent successfully, refund will be sent to your account within 3-5 working days.")
     window.alert("Your ticket was cancelled and the refund request was sent successfully, refund will be sent to your account within 3-5 working days.")
     parentform.submit()
