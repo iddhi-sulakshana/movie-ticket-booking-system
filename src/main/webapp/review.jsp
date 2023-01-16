@@ -74,7 +74,7 @@
 
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-                <a class="btn btn-primary" href="index.jsp" role="button">Return Home</a>
+                <a class="btn btn-primary" href="index.jsp?invalidate=true" role="button">Cancel Order</a>
             </div>
         </div>
 

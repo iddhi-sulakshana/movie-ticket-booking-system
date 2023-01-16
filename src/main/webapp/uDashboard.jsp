@@ -112,8 +112,13 @@
                                         <div class="t-time"><i class="fa-light fa-clock"></i> <%=ticket.showtime%></div>
                                         <div class="row mt-2">
                                             <div class="col">
-                                                <button class="btn btn-outline-danger" onclick="location.href='./cancelTicketServlet?ticketId=<%=ticket.ticketId%>'">Cancel</button>
-                                                <input type="movieid" id="movieid" value="<%=movie.title%>" hidden>
+                                                <form method="post" action="./deleteTicketServlet" >
+                                                    <button class="btn btn-outline-danger" onclick="cancelBook(this)">Cancel</button>
+                                                    <input type="text" value="<%=ticket.ticketId%>" name="ticketId" value="<%=ticket.ticketId%>" hidden>
+                                                    <input type="text" value="<%=ticket.transactionId%>" name="transactionId" value="<%=ticket.transactionId%>" hidden>
+                                                    <input type="text" value="<%=movie.title%>" name="title" value="<%=movie.title%>" hidden>
+                                                    <input type="text" value="<%=user.email%>" name="uemail" value="<%=user.email%>" hidden>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
