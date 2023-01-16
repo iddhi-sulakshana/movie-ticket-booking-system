@@ -78,7 +78,7 @@ public class ExecutePaymentServlet extends HttpServlet {
             ticketObj.close();
             request.getRequestDispatcher("receipt.jsp").forward(request, response);
 
-            session.invalidate();
+            session.removeAttribute("order");
 
         } catch (PayPalRESTException ex) {
             ticketObj.close();
@@ -91,7 +91,8 @@ public class ExecutePaymentServlet extends HttpServlet {
         TwillioAPI twillio = new TwillioAPI();
         String seats = "";
         String body = "Payment to ABC Movies was completed at " + paymentTime + ". Transaction ID: " + paymentId + ", Paid Amount: $" + amountPaid + ", Seat Numbers : " + ticket.seats;
-        twillio.sendSMS("+94"+customerPhone, body); //phone number must be registerd in twillio
+        //uncomment below code to send sms
+        //twillio.sendSMS("+94"+customerPhone, body); //phone number must be registerd in twillio
 
 
         ticketObj.close();

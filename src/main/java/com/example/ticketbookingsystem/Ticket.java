@@ -52,8 +52,8 @@ public class Ticket extends Database{
         }
         return tickets;
     }
-    public void deleteTicket(int id){
-        collection.findOneAndDelete(eq("ticketId", id));
+    public void deleteTicket(int id, String email, String transactioId){
+        collection.findOneAndDelete(Filters.and(eq("ticketId", id), eq("email", email), eq("transactionId", transactioId)));
     }
     public double getTotalSales(){
         MongoIterable<TicketStruct> ticket = collection.find().projection(Projections.include("price"));

@@ -7,6 +7,13 @@
 <%@ page import="java.text.DateFormat" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@include file="./header.jsp" %>
+<%
+    if(session.getAttribute("invalidate") != null){
+        if(session.getAttribute("invalidate") == "true"){
+            session.removeAttribute("order");
+        }
+    }
+%>
     <link rel="stylesheet" href="./css/home.css">
 <script defer src="./jquery/jquery.min.js"></script>
     <script defer src="./js/home.js"></script>
