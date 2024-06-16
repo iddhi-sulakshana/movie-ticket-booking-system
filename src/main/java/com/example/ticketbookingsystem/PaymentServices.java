@@ -50,8 +50,8 @@ public class PaymentServices {
 
     private RedirectUrls getRedirectURLs() {
         RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setCancelUrl("http://localhost:8080/TicketBookingSystem_war_exploded/cancel.jsp");
-        redirectUrls.setReturnUrl("http://localhost:8080/TicketBookingSystem_war_exploded/review_payment");
+        redirectUrls.setCancelUrl("http://localhost:8080/TicketBookingSystem-1.0-SNAPSHOT/index.jsp?invalidate=true");
+        redirectUrls.setReturnUrl("http://localhost:8080/TicketBookingSystem-1.0-SNAPSHOT/review_payment");
 
         return redirectUrls;
     }
